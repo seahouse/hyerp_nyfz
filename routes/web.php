@@ -76,7 +76,7 @@ Route::group(['prefix' => 'sales', 'namespace' => 'Sales', 'middleware' => ['web
 //    Route::group(['prefix' => 'custinfos'], function() {
 //        Route::get('getitemsbykey/{key}', 'CustinfosController@getitemsbykey');
 //    });
-    Route::resource('customers', 'CustomerController');
+    Route::resource('custinfos', 'CustinfoController');
 //    Route::get('report', '\App\Http\Controllers\System\ReportController@indexsales');
 //    Route::group(['prefix' => 'report2'], function() {
 //        Route::get('bonusbysalesmanager', '\App\Http\Controllers\My\MyController@bonusbysalesmanager');
