@@ -6,18 +6,19 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('descrip', '描述:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
+    {!! Form::label('descrip', '订单名称:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
         {!! Form::text('descrip', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 
-{{--<div class="form-group">--}}
-    {{--{!! Form::label('customer_id', '客户:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}--}}
-    {{--<div class='col-xs-8 col-sm-10'>--}}
-        {{--{!! Form::text('customer_id', null, ['class' => 'form-control']) !!}--}}
-    {{--</div>--}}
-{{--</div>--}}
+<div class="form-group">
+    {!! Form::label('customer_name', '客户:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
+    <div class='col-xs-8 col-sm-10'>
+        {!! Form::text('customer_name', null, ['class' => 'form-control', 'data-toggle' => 'modal', 'data-target' => '#selectCustomerModal', 'id' => 'customer_name']) !!}
+        {!! Form::hidden('customer_id', null, ['id' => 'customer_id']) !!}
+    </div>
+</div>
 
 
 <div class="form-group">

@@ -73,10 +73,10 @@ Route::group(['prefix' => 'sales', 'namespace' => 'Sales', 'middleware' => ['web
 //    Route::get('soitems/{headId}/list', 'SoitemsController@listBySoheadId');
 //    Route::get('soitems/{headId}/create', 'SoitemsController@createBySoheadId');
 //    Route::resource('soitems', 'SoitemsController');
-//    Route::group(['prefix' => 'custinfos'], function() {
-//        Route::get('getitemsbykey/{key}', 'CustinfosController@getitemsbykey');
-//    });
-    Route::resource('custinfos', 'CustinfoController');
+    Route::group(['prefix' => 'customers'], function() {
+        Route::get('getitemsbykey/{key}', 'CustomerController@getitemsbykey');
+    });
+    Route::resource('customers', 'CustomerController');
 //    Route::get('report', '\App\Http\Controllers\System\ReportController@indexsales');
 //    Route::group(['prefix' => 'report2'], function() {
 //        Route::get('bonusbysalesmanager', '\App\Http\Controllers\My\MyController@bonusbysalesmanager');

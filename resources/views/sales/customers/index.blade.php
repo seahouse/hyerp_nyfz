@@ -4,7 +4,7 @@
 
 @section('main')
     <div class="panel-heading">
-        <a href="custinfos/create" class="btn btn-sm btn-success">新建</a>
+        <a href="customers/create" class="btn btn-sm btn-success">新建</a>
         {{--<a href="shipments/import" class="btn btn-sm btn-success">导入(Import)</a>--}}
     </div>
 
@@ -36,40 +36,44 @@
         {{--</div>--}}
         {{--{!! Form::close() !!}--}}
 
-        @if ($custinfos->count())
+        @if ($customers->count())
             <table class="table table-striped table-hover table-condensed">
                 <thead>
                 <tr>
                     <th>编号</th>
                     <th>客户名称</th>
                     <th>联系人</th>
+                    <th>联系人电话</th>
                     <th>备注</th>
                     {{--<th>Detail</th>--}}
                     <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($custinfos as $custinfo)
+                @foreach($customers as $customer)
                     <tr>
                         <td>
-                            {{ $custinfo->number }}
+                            {{ $customer->number }}
                         </td>
                         <td>
-                            {{ $custinfo->name }}
+                            {{ $customer->name }}
                         </td>
                         <td>
-                            {{ $custinfo->contact_name }}
+                            {{ $customer->contact_name }}
                         </td>
                         <td>
-                            {{ $custinfo->comments }}
+                            {{ $customer->contact_phone }}
+                        </td>
+                        <td>
+                            {{ $customer->remark }}
                         </td>
                         {{--<td>--}}
                         {{--<a href="{{ URL::to('/shipment/shipments/' . $sohead->id . '/shipmentitems') }}" target="_blank">Detail</a>--}}
                         {{--</td>--}}
                         <td>
-                            <a href="{{ URL::to('/sales/custinfos/'.$custinfo->id.'/edit') }}" class="btn btn-success btn-sm pull-left">编辑</a>
+                            <a href="{{ URL::to('/sales/customers/'.$customer->id.'/edit') }}" class="btn btn-success btn-sm pull-left">编辑</a>
                             {{--<a href="{{ URL::to('/shipment/shipments/'.$sohead->id.'/export') }}" class="btn btn-success btn-sm pull-left">导出</a>--}}
-                            {!! Form::open(array('route' => array('custinfos.destroy', $custinfo->id), 'method' => 'delete', 'onsubmit' => 'return confirm("确定删除此记录?");')) !!}
+                            {!! Form::open(array('route' => array('customers.destroy', $customer->id), 'method' => 'delete', 'onsubmit' => 'return confirm("确定删除此记录?");')) !!}
                             {!! Form::submit('删除', ['class' => 'btn btn-danger btn-sm']) !!}
                             {!! Form::close() !!}
                         </td>
@@ -78,8 +82,8 @@
                 </tbody>
 
             </table>
-            {{--{!! $custinfo->render() !!}--}}
-            {{--{!! $custinfo->setPath('/shipment/shipments')->appends([--}}
+            {{--{!! $customer->render() !!}--}}
+            {{--{!! $customer->setPath('/shipment/shipments')->appends([--}}
                 {{--'createdatestart' => isset($inputs['createdatestart']) ? $inputs['createdatestart'] : null,--}}
                 {{--'createdateend' => isset($inputs['createdateend']) ? $inputs['createdateend'] : null,--}}
                 {{--'etdstart' => isset($inputs['etdstart']) ? $inputs['etdstart'] : null,--}}

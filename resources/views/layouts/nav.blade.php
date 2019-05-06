@@ -51,7 +51,7 @@
                     <ul class="dropdown-menu">
                         @can('module_sales')
                         <li><a href="/sales/soheads">销售订单</a></li>
-                        <li><a href="/sales/custinfos">客户</a></li>
+                        <li><a href="/sales/customers">客户</a></li>
                         {{--<li role="separator" class="divider"></li>--}}
                         {{--<li><a href="/inventory/inventoryAvailabilityBySalesorder">库存可用量</a></li>--}}
                             {{--<li><a href="/sales/report">报表</a></li>--}}

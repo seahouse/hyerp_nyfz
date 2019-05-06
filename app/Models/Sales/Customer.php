@@ -4,14 +4,16 @@ namespace App\Models\Sales;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Custinfo extends Model
+class Customer extends Model
 {
     //
     protected $fillable = [
+        'active',
         'number',
         'name',
         'contact_name',
-        'comments',
+        'contact_phone',
+        'remark',
     ];
 
 

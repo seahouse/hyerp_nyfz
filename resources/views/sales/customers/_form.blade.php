@@ -23,14 +23,21 @@
 <div class="form-group">
     {!! Form::label('contact_name', '联系人:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
-        {!! Form::date('contact_name', null, ['class' => 'form-control']) !!}
+        {!! Form::text('contact_name', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 
 <div class="form-group">
-    {!! Form::label('comments', '备注:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
+    {!! Form::label('contact_phone', '联系人电话:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
-        {!! Form::date('comments', null, ['class' => 'form-control']) !!}
+        {!! Form::text('contact_phone', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+
+<div class="form-group">
+    {!! Form::label('remark', '备注:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
+    <div class='col-xs-8 col-sm-10'>
+        {!! Form::text('remark', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 {{--<div class="form-group">--}}

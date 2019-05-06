@@ -55,7 +55,7 @@
                             {{ $sohead->number }}
                         </td>
                         <td>
-                            {{ $sohead->customer_name }}
+                            {{ $sohead->customer->name }}
                         </td>
                         <td>
                             {{ $sohead->orderdate }}

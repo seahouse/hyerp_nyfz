@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Sales;
 
-use App\Models\Sales\Custinfo;
+use App\Models\Sales\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CustinfoController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,18 @@ class CustinfoController extends Controller
     public function index()
     {
         //
-        $custinfos = Custinfo::latest('created_at')->paginate(10);
-        return view('sales.custinfos.index', compact('custinfos'));
+        $customers = Customer::latest('created_at')->paginate(10);
+        return view('sales.customers.index', compact('customers'));
+    }
+
+    public function getitemsbykey($key)
+    {
+        // $salesorders = Salesorder::latest('created_at')->where('number', 'like', '%' . $key . '%')
+        //     ->orWhere('descrip', 'like', '%'.$key.'%')->paginate(20);
+        // $vendinfos = Vendinfo::where('name', 'like', '%' . $key . '%')->paginate(20);
+        $customers = Customer::where('name', 'like', '%' . $key . '%')
+            ->orWhere('number', 'like', '%' . $key . '%')->paginate(20);
+        return $customers;
     }
 
     /**
@@ -28,7 +38,7 @@ class CustinfoController extends Controller
     public function create()
     {
         //
-        return view('sales.custinfos.create');
+        return view('sales.customers.create');
     }
 
     /**
@@ -42,9 +52,9 @@ class CustinfoController extends Controller
         //
         $input = $request->all();
 //        dd($input);
-        Sohead::create($input);
+        Customer::create($input);
 
-        return redirect('sales/custinfos');
+        return redirect('sales/customers');
     }
 
     /**
@@ -67,8 +77,8 @@ class CustinfoController extends Controller
     public function edit($id)
     {
         //
-        $custinfo = Custinfo::findOrFail($id);
-        return view('sales.custinfos.edit', compact('custinfo'));
+        $customer = Customer::findOrFail($id);
+        return view('sales.customers.edit', compact('customer'));
     }
 
     /**
@@ -81,11 +91,11 @@ class CustinfoController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $custinfo = Custinfo::findOrFail($id);
-        $custinfo->update($request->all());
+        $customer = Customer::findOrFail($id);
+        $customer->update($request->all());
 
 
-        return redirect('sales/custinfos');
+        return redirect('sales/customers');
     }
 
     /**
@@ -97,7 +107,7 @@ class CustinfoController extends Controller
     public function destroy($id)
     {
         //
-        Custinfo::destroy($id);
-        return redirect('sales/custinfos');
+        Customer::destroy($id);
+        return redirect('sales/customers');
     }
 }
