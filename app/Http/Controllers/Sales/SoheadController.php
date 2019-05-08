@@ -43,6 +43,12 @@ class SoheadController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'number' => 'required|unique:soheads|max:255',
+            'customer_id'=>'required',
+            'orderdate'=>'required',
+        ]);
+
         $input = $request->all();
 //        dd($input);
         Sohead::create($input);

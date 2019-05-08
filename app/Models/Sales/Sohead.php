@@ -9,7 +9,7 @@ class Sohead extends Model
     //
     protected $fillable = [
         'number',
-        'descrip',
+        'name',
         'customer_id',
         'orderdate',
         'salesmanager_id',

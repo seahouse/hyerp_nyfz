@@ -55,10 +55,10 @@
                             {{ $sohead->number }}
                         </td>
                         <td>
-                            {{ $sohead->customer->name }}
+                            @if (isset($sohead->customer->name)) {{ $sohead->customer->name }}  @endif
                         </td>
                         <td>
-                            {{ $sohead->orderdate }}
+                            @if (isset($sohead->orderdate)) {{ $sohead->orderdate }} @else @endif
                         </td>
                         <td>
                             {{ $sohead->created_at }}
