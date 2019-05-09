@@ -30,6 +30,7 @@ class PurchaseorderController extends Controller
     public function create()
     {
         //
+        return view('purchase.purchaseorders.create');
     }
 
     /**
@@ -41,6 +42,17 @@ class PurchaseorderController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'number' => 'required|unique:soheads|max:255',
+            'vendor_id'=>'required',
+            'orderdate'=>'required',
+        ]);
+
+        $input = $request->all();
+//        dd($input);
+        Purchaseorder::create($input);
+
+        return redirect('purchase/purchaseorders');
     }
 
     public function storeseperate(Request $request)

@@ -4,7 +4,7 @@
 
 @section('main')
     <div class="panel-heading">
-        {{--<a href="purchaseorders/create" class="btn btn-sm btn-success">新建</a>--}}
+        <a href="purchaseorders/create" class="btn btn-sm btn-success">新建</a>
 {{--        <div class="pull-right" style="padding-top: 4px;">
             <a href="{{ URL::to('purchase/vendtypes') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> {{'客户类型管理', [], 'layouts'}}</a>
         </div> --}}
@@ -18,7 +18,7 @@
                 <th>编号</th>
                 <th>采购订单名称</th>
                 <th>供应商</th>
-                <th>对应客户PO</th>
+                {{--<th>对应客户PO</th>--}}
                 <th>物料</th>
                 <th>操作</th>
             </tr>
@@ -35,9 +35,9 @@
                     <td>
                         {{ $purchaseorder->vendor->name }}
                     </td>
-                    <td>
-                        @if (isset($purchaseorder->poheadc->purchase_order_number)) {{ $purchaseorder->poheadc->purchase_order_number }} @endif
-                    </td>
+                    {{--<td>--}}
+                        {{--@if (isset($purchaseorder->poheadc->purchase_order_number)) {{ $purchaseorder->poheadc->purchase_order_number }} @endif--}}
+                    {{--</td>--}}
                     <td>
                         <a href="{{ URL::to('/purchase/purchaseorders/' . $purchaseorder->id . '/detail') }}" target="_blank">明细</a>
                     </td>

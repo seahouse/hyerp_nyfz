@@ -15,6 +15,8 @@
             <tr>
                 <th>编号</th>
                 <th>名称</th>
+                <th>联系人1</th>
+                <th>联系人电话1</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -26,6 +28,12 @@
                     </td>
                     <td>
                         {{ $vendor->name }}
+                    </td>
+                    <td>
+                        {{ $vendor->contact_name1 }}
+                    </td>
+                    <td>
+                        {{ $vendor->contact_phone1 }}
                     </td>
                     <td>
                         <a href="{{ URL::to('/purchase/vendors/'.$vendor->id.'/edit') }}" class="btn btn-success btn-sm pull-left">编辑</a>

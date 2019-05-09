@@ -63,20 +63,20 @@
                         @endcan
                     </ul>
                 </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">客户采购订单<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            @can('module_customerpurchase')
-                                <li><a href="/purchaseorderc/purchaseordercs">采购订单</a></li>
-                            @endcan
-                        </ul>
-                    </li>
+                    {{--<li class="dropdown">--}}
+                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">客户采购订单<span class="caret"></span></a>--}}
+                        {{--<ul class="dropdown-menu">--}}
+                            {{--@can('module_customerpurchase')--}}
+                                {{--<li><a href="/purchaseorderc/purchaseordercs">采购订单</a></li>--}}
+                            {{--@endcan--}}
+                        {{--</ul>--}}
+                    {{--</li>--}}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">采购<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         @can('module_purchase')
                             <li><a href="/purchase/purchaseorders">采购订单</a></li>
-                            <li><a href="/purchase/asns">ASN</a></li>
+                            {{--<li><a href="/purchase/asns">ASN</a></li>--}}
                         <li><a href="/purchase/vendors">供应商</a></li>
                         {{--<li role="separator" class="divider"></li>--}}
                         {{--<li><a href="/inventory/inventoryAvailability">库存可用量</a></li>--}}
