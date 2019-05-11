@@ -20,6 +20,12 @@
 @endsection
 
 @section('script')
-    @include('sales.soheads._selectsalesorderjs')
+    @component('sales.soheads._selectsalesorderjs')
+        $("#sohead_name").val(field.name);
+        $("#sohead_id").val(field.id);
+    @endcomponent
+
+    {{--@include('sales.soheads._selectsalesorderjs')--}}
+
     @include('purchase.vendors._selectvendorjs')
 @endsection

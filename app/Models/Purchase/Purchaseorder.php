@@ -26,7 +26,7 @@ class Purchaseorder extends Model
         return $this->hasOne('App\Models\Purchase\Vendor', 'id', 'vendor_id');
     }
 
-    public function poheadc() {
-        return $this->hasOne('App\Models\Purchaseorderc\Poheadc', 'id', 'poheadc_id');
+    public function soheads() {
+        return $this->belongsToMany('App\Models\Sales\Sohead', 'sohead_pohead', 'pohead_id');
     }
 }

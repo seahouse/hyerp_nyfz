@@ -20,6 +20,7 @@
         @else
             {!! Form::text('sohead_name', null, ['class' => 'form-control', $attr, 'data-toggle' => 'modal', 'data-target' => '#selectSalesorderModal', 'data-name' => 'project_name', 'data-id' => 'sohead_id']) !!}
         @endif
+            {!! Form::hidden('sohead_id', null, ['id' => 'sohead_id']) !!}
     </div>
 </div>
 

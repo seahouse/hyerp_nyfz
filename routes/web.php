@@ -47,12 +47,12 @@ Route::group(['prefix' => 'sales', 'namespace' => 'Sales', 'middleware' => ['web
 //    Route::resource('projects', 'ProjectController');
 //    Route::get('salesorders/{id}/ship', 'SalesordersController@ship');
 //    Route::post('salesorders/search', 'SalesordersController@search');
-//    Route::group(['prefix' => 'salesorders'], function() {
+    Route::group(['prefix' => 'soheads'], function() {
 //        Route::get('mindex', 'SalesordersController@mindex');
 //        Route::get('getitembyid/{id}', 'SalesordersController@getitembyid');
-//        Route::get('getsohx', 'SalesordersController@getsohx');
+        Route::get('getitemsbykey/{key}', 'SoheadController@getitemsbykey');
 //        Route::get('{id}/mstatistics', 'SalesordersController@mstatistics');
-//    });
+    });
     Route::resource('soheads', 'SoheadController');
 //    Route::group(['prefix' => 'salesorderhx'], function() {
 //        Route::post('search', 'SalesorderhxController@search');

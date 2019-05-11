@@ -14,6 +14,8 @@ class CreateSoheadPoheadTable extends Migration
     public function up()
     {
         Schema::create('sohead_pohead', function (Blueprint $table) {
+            $table->increments('id');
+
             $table->integer('sohead_id')->unsigned();
             $table->integer('pohead_id')->unsigned();
 
@@ -22,7 +24,7 @@ class CreateSoheadPoheadTable extends Migration
 
             $table->timestamps();
 
-            $table->primary(['sohead_id', 'pohead_id']);
+            $table->unique(['sohead_id', 'pohead_id']);
         });
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Purchase;
 
 use App\Models\Purchase\Poitem;
 use App\Models\Purchase\Purchaseorder;
+use App\Models\Purchase\Sohead_Pohead;
 use App\Models\Purchaseorderc\Poitemc;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -141,6 +142,21 @@ class PurchaseorderController extends Controller
         //
         $purchaseorder = Purchaseorder::findOrFail($id);
         $purchaseorder->update($request->all());
+
+        if ($request->has('sohead_id') && $request->input('sohead_id')> 0)
+        {
+            $sohead_pohead = new Sohead_Pohead;
+            $sohead_pohead->sohead_id = $request->input('sohead_id');
+            $sohead_pohead->pohead_id = $purchaseorder->id;
+            $sohead_pohead->save();
+
+//            Sohead_Pohead::create([
+//                'sohead_id' => $request->input('sohead_id'),
+//                'pohead_id' => $purchaseorder->id,
+//            ]);
+        }
+
+
         return redirect('purchase/purchaseorders');
     }
 

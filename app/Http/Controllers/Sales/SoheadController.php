@@ -23,6 +23,13 @@ class SoheadController extends Controller
         return view('sales.soheads.index', compact('soheads'));
     }
 
+    public function getitemsbykey($key)
+    {
+        $soheads = Sohead::latest('created_at')->where('number', 'like', '%' . $key . '%')
+            ->orWhere('name', 'like', '%'.$key.'%')->paginate(20);
+        return $soheads;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

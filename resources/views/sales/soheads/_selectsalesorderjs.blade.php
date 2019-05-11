@@ -1,14 +1,5 @@
 <script type="text/javascript">
     jQuery(document).ready(function(e) {
-
-
-
-
-
-
-
-
-
         $('#selectSalesorderModal').on('show.bs.modal', function (e) {
             $("#listproject").empty();
 
@@ -28,12 +19,12 @@
             }
             $.ajax({
                 type: "GET",
-                url: "{!! url('/sales/salesorders/getitemsbykey/') !!}" + "/" + $("#keyProject").val(),
+                url: "{!! url('/sales/soheads/getitemsbykey/') !!}" + "/" + $("#keyProject").val(),
                 success: function(result) {
                     var strhtml = '';
                     $.each(result.data, function(i, field) {
                         btnId = 'btnSelectProject_' + String(i);
-                        strhtml += "<button type='button' class='list-group-item' id='" + btnId + "'>" + "<h4>" + field.number + "</h4><p>" + field.descrip + "</p></button>"
+                        strhtml += "<button type='button' class='list-group-item' id='" + btnId + "'>" + "<h4>" + field.number + "</h4><p>" + field.name + "</p></button>"
                     });
                     if (strhtml == '')
                         strhtml = '无记录。';
@@ -41,7 +32,7 @@
 
                     $.each(result.data, function(i, field) {
                         btnId = 'btnSelectProject_' + String(i);
-                        addBtnClickEventProject(btnId, field.id, field.number, field);
+                        addBtnClickEventProject(btnId, field);
                     });
                     // addBtnClickEvent('btnSelectOrder_0');
                 },
@@ -51,17 +42,14 @@
             });
         });
 
-        function addBtnClickEventProject(btnId, soheadid, name, field)
+        function addBtnClickEventProject(btnId, field)
         {
             $("#" + btnId).bind("click", function() {
                 $('#selectSalesorderModal').modal('toggle');
-                $("#" + $("#selectSalesorderModal").find('#name').val()).val(field.descrip);
-                $("#" + $("#selectSalesorderModal").find('#id').val()).val(soheadid);
-                $("#sohead_number").val(field.number);
-//					$("#supplier_bank").val(field.bank);
-//					$("#supplier_bankaccountnumber").val(field.bankaccountnumber);
-//					$("#vendbank_id").val(field.vendbank_id);
-//					$("#selectSupplierBankModal").find("#vendinfo_id").val(supplierid);
+                // $("#" + $("#selectSalesorderModal").find('#name').val()).val(field.name);
+                // $("#" + $("#selectSalesorderModal").find('#id').val()).val(field.id);
+                // $("#sohead_number").val(field.number);
+                {{ $slot }}
             });
         }
     });
