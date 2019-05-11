@@ -15,9 +15,11 @@
     
     @include('errors.list')
 
+    @include('sales.soheads._selectsalesordermodal')
     @include('purchase.vendors._selectvendormodal')
 @endsection
 
 @section('script')
+    @include('sales.soheads._selectsalesorderjs')
     @include('purchase.vendors._selectvendorjs')
 @endsection
