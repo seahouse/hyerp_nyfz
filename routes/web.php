@@ -36,6 +36,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('changeuser_store', 'HelperController@changeuser_store');
 });
 
+Route::group(['prefix' => 'inventory', 'namespace' => 'Inventory', 'middleware' => ['web', 'auth']], function() {
+    Route::resource('warehouses', 'WarehouseController');
+});
 Route::group(['prefix' => 'sales', 'namespace' => 'Sales', 'middleware' => ['web', 'auth']], function() {
 //    Route::group(['prefix' => 'groups'], function() {
 //        Route::get('{id}/mstatistics', 'GroupController@mstatistics');

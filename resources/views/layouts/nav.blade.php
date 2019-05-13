@@ -34,18 +34,18 @@
                             {{--@endcan--}}
                     {{--</ul>--}}
                 {{--</li>--}}
-                {{--<li class="dropdown">--}}
-                    {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">库存<span class="caret"></span></a>--}}
-                    {{--<ul class="dropdown-menu">--}}
-                        {{--@can('module_inventory')--}}
-                        {{--<li><a href="/inventory/warehouses">仓库</a></li>--}}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">库存<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        @can('module_inventory')
+                        <li><a href="/inventory/warehouses">仓库</a></li>
                         {{--<li role="separator" class="divider"></li>--}}
                         {{--@can('inventory_batch_search')--}}
                             {{--<li><a href="/inventory/report">报表</a></li>--}}
-                        {{--@endcan--}}
-                        {{--@endcan--}}
-                    {{--</ul>--}}
-                {{--</li>--}}
+                        @endcan
+
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">销售<span class="caret"></span></a>
                     <ul class="dropdown-menu">
