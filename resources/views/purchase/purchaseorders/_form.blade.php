@@ -13,12 +13,12 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('sohead_name', '对应项目:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
+    {!! Form::label('sohead_name', '对应销售订单:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
         @if (isset($purchaseorder->sohead->name))
-            {!! Form::text('sohead_name', $purchaseorder->sohead->name, ['class' => 'form-control', $attr]) !!}
+            {!! Form::text('sohead_name', $purchaseorder->sohead->name, ['class' => 'form-control', $attr, 'data-toggle' => 'modal', 'data-target' => '#selectSalesorderModal', 'data-name' => 'sohead_name', 'data-id' => 'sohead_id']) !!}
         @else
-            {!! Form::text('sohead_name', null, ['class' => 'form-control', $attr, 'data-toggle' => 'modal', 'data-target' => '#selectSalesorderModal', 'data-name' => 'project_name', 'data-id' => 'sohead_id']) !!}
+            {!! Form::text('sohead_name', null, ['class' => 'form-control', $attr, 'data-toggle' => 'modal', 'data-target' => '#selectSalesorderModal', 'data-name' => 'sohead_name', 'data-id' => 'sohead_id']) !!}
         @endif
             {!! Form::hidden('sohead_id', null, ['id' => 'sohead_id']) !!}
     </div>

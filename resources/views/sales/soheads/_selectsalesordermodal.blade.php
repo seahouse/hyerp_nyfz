@@ -18,17 +18,9 @@
 
                 </div>
                 </p>
-                <form id="formAccept">
-                    {!! csrf_field() !!}
 
-                    {{--                    {!! Form::hidden('reimbursement_id', $reimbursement->id, ['class' => 'form-control']) !!}
-                                        {!! Form::hidden('status', 0, ['class' => 'form-control']) !!} --}}
-                </form>
             </div>
-            {{--            <div class="modal-footer">
-                            {!! Form::button('取消', ['class' => 'btn btn-sm', 'data-dismiss' => 'modal']) !!}
-                            {!! Form::button('确定', ['class' => 'btn btn-sm', 'id' => 'btnAccept']) !!}
-                        </div>--}}
+
         </div>
     </div>
 </div>

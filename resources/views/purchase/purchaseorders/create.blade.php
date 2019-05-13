@@ -14,9 +14,15 @@
     
 
     @include('errors.list')
+    @include('sales.soheads._selectsalesordermodal')
     @include('purchase.vendors._selectvendormodal')
 @stop
 
 @section('script')
+    @component('sales.soheads._selectsalesorderjs')
+        $("#sohead_name").val(field.name);
+        $("#sohead_id").val(field.id);
+    @endcomponent
+
     @include('purchase.vendors._selectvendorjs')
 @endsection
