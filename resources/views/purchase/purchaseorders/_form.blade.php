@@ -15,8 +15,8 @@
 <div class="form-group">
     {!! Form::label('sohead_name', '对应销售订单:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
-        @if (isset($purchaseorder->sohead->name))
-            {!! Form::text('sohead_name', $purchaseorder->sohead->name, ['class' => 'form-control', $attr, 'data-toggle' => 'modal', 'data-target' => '#selectSalesorderModal', 'data-name' => 'sohead_name', 'data-id' => 'sohead_id']) !!}
+        @if (isset($purchaseorder->soheads->first()->name))
+            {!! Form::text('sohead_name', $purchaseorder->soheads->first()->name, ['class' => 'form-control', $attr, 'data-toggle' => 'modal', 'data-target' => '#selectSalesorderModal', 'data-name' => 'sohead_name', 'data-id' => 'sohead_id']) !!}
         @else
             {!! Form::text('sohead_name', null, ['class' => 'form-control', $attr, 'data-toggle' => 'modal', 'data-target' => '#selectSalesorderModal', 'data-name' => 'sohead_name', 'data-id' => 'sohead_id']) !!}
         @endif
