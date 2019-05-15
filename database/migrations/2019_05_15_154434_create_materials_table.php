@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMaterialCatsTable extends Migration
+class CreateMaterialsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateMaterialCatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('material_cats', function (Blueprint $table) {
+        Schema::create('materials', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('number')->unique();
-            $table->string('name')->nullable()->default('');
-            $table->string('note')->nullable()->default('');
+            $table->string('name')->nullable();
+            $table->integer('material_cats_id')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateMaterialCatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('material_cats');
+        Schema::dropIfExists('materials');
     }
 }
