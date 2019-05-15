@@ -39,6 +39,7 @@
                         <ul class="dropdown-menu">
                             @can('module_material_cat')
                                 <li><a href="/basic/material_cats">物料类别</a></li>
+                                <li><a href="/basic/materials">物料管理</a></li>
                                 {{--<li role="separator" class="divider"></li>--}}
                                 {{--@can('inventory_batch_search')--}}
                                 {{--<li><a href="/inventory/report">报表</a></li>--}}

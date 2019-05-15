@@ -13,4 +13,10 @@ class Material extends Model
         'material_cat_id',
         'note',
     ];
+
+    public function material_cat()
+    {
+
+        return $this->belongsTo('App\Models\Basic\Material_cat');
+    }
 }

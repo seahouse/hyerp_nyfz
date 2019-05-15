@@ -40,6 +40,11 @@ class Material_catController extends Controller
     public function store(Request $request)
     {
         //
+
+        $this->validate($request, [
+            'number' => 'required|unique:material_cats|max:255',
+            'name'=>'required',
+        ]);
         $input = $request->all();
 
         Material_cat::create($input);
@@ -81,6 +86,7 @@ class Material_catController extends Controller
     public function update(Request $request, $id)
     {
         //
+
         $material_cat = Material_cat::findOrFail($id);
         $material_cat->update($request->all());
         return redirect('basic/material_cats');
