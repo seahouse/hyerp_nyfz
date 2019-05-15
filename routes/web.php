@@ -39,6 +39,11 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['prefix' => 'inventory', 'namespace' => 'Inventory', 'middleware' => ['web', 'auth']], function() {
     Route::resource('warehouses', 'WarehouseController');
 });
+
+Route::group(['prefix' => 'basic', 'namespace' => 'Basic', 'middleware' => ['web', 'auth']], function() {
+    Route::resource('material_cats', 'Material_catController');
+});
+
 Route::group(['prefix' => 'sales', 'namespace' => 'Sales', 'middleware' => ['web', 'auth']], function() {
 //    Route::group(['prefix' => 'groups'], function() {
 //        Route::get('{id}/mstatistics', 'GroupController@mstatistics');
