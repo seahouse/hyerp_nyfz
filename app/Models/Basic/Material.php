@@ -17,6 +17,6 @@ class Material extends Model
     public function material_cat()
     {
 
-        return $this->belongsTo('App\Models\Basic\Material_cat');
+        return $this->hasone('App\Models\Basic\Material_cat','id', 'material_cat_id');
     }
 }
