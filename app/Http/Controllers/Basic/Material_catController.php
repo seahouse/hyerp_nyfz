@@ -20,6 +20,15 @@ class Material_catController extends Controller
         return view('basic.material_cats.index', compact('material_cats'));
     }
 
+
+    public function getitemsbykey($key)
+    {
+
+        $material_cats = Material_cat::where('name', 'like', '%' . $key . '%')->paginate(20);
+        return $material_cats;
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *

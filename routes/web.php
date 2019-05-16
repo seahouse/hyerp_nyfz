@@ -42,6 +42,10 @@ Route::group(['prefix' => 'inventory', 'namespace' => 'Inventory', 'middleware' 
 
 Route::group(['prefix' => 'basic', 'namespace' => 'Basic', 'middleware' => ['web', 'auth']], function() {
     Route::resource('material_cats', 'Material_catController');
+    Route::resource('materials', 'MaterialController');
+    Route::group(['prefix' => 'material_cats'], function() {
+        Route::get('getitemsbykey/{key}', 'Material_catController@getitemsbykey');
+    });
 });
 
 Route::group(['prefix' => 'sales', 'namespace' => 'Sales', 'middleware' => ['web', 'auth']], function() {
