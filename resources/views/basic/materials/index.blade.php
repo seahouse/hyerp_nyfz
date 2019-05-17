@@ -27,10 +27,11 @@
                         {{ $material->number }}
                     </td>
                     <td>
-                        @if (isset($material->material_cat->name)) {{ $material->material_cat->name }}  @endif
+                        {{ $material->name }}
+
                     </td>
                     <td>
-                        {{ $material->name }}
+                        {{ $material->material_cat->name }}
                     </td>
                     <td>
                         {{ $material->note }}

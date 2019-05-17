@@ -1,16 +1,5 @@
 <script type="text/javascript">
     jQuery(document).ready(function(e) {
-
-
-
-
-
-
-
-
-
-
-
         $('#selectVendorModal').on('show.bs.modal', function (e) {
             $("#listvendors").empty();
 

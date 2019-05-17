@@ -10,7 +10,7 @@ class Material extends Model
     protected $fillable = [
         'number',
         'name',
-        'material_cats_id',
+        'material_cat_id',
         'note',
     ];
 

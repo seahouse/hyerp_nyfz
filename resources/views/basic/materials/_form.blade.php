@@ -18,7 +18,7 @@
         @if (isset($material))
             {!! Form::text('material_cat_name', $material->material_cat->name, ['class' => 'form-control', 'data-toggle' => 'modal', 'data-target' => '#selectMaterial_catModal', 'id' => 'material_cat_name']) !!}
         @else
-            {!! Form::text('material_cat_name', null, ['class' => 'form-control', 'data-toggle' => 'modal', 'data-target' => '#selectMaterial_catModal', 'id' => 'material_cat_name']) !!}
+            {!! Form::text('material_cat_name', null, ['class' => 'form-control', 'data-toggle' => 'modal', 'data-target' => '#selectMaterial_catModal',  'id' => 'material_cat_name']) !!}
         @endif
         {!! Form::hidden('material_cat_id', null, ['id' => 'material_cat_id']) !!}
     </div>

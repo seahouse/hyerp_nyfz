@@ -23,7 +23,7 @@
                 success: function(result) {
                     var strhtml = '';
                     $.each(result.data, function(i, field) {
-                        btnId = 'btnSelectProject_' + String(i);
+                        btnId = 'btnSelectMaterial_cat_' + String(i);
                         strhtml += "<button type='button' class='list-group-item' id='" + btnId + "'>" + "<h4>" + field.number + "</h4><p>" + field.name + "</p></button>"
                     });
                     if (strhtml == '')
@@ -31,8 +31,8 @@
                     $("#listmaterial_cat").empty().append(strhtml);
 
                     $.each(result.data, function(i, field) {
-                        btnId = 'btnSelectProject_' + String(i);
-                        addBtnClickEventProject(btnId, field);
+                        btnId = 'btnSelectMaterial_cat_' + String(i);
+                        addBtnClickEventMaterial_cat(btnId, field);
                     });
                     // addBtnClickEvent('btnSelectOrder_0');
                 },
@@ -42,7 +42,7 @@
             });
         });
 
-        function addBtnClickEventProject(btnId, field)
+        function addBtnClickEventMaterial_cat(btnId, field)
         {
             $("#" + btnId).bind("click", function() {
                 $('#selectMaterial_catModal').modal('toggle');

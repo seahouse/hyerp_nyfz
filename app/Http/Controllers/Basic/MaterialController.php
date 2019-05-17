@@ -40,6 +40,7 @@ class MaterialController extends Controller
     public function store(Request $request)
     {
         //
+        //dd($request->all());
         $this->validate($request, [
             'number' => 'required|unique:materials|max:255',
             'material_cat_id'=>'required',
@@ -47,7 +48,7 @@ class MaterialController extends Controller
         ]);
         $input = $request->all();
 
-        material::create($input);
+        Material::create($input);
 
         return redirect('basic/materials');
     }
@@ -72,7 +73,7 @@ class MaterialController extends Controller
     public function edit($id)
     {
         //
-        $material = material::findOrFail($id);
+        $material = Material::findOrFail($id);
         return view('basic.materials.edit', compact('material'));
     }
 
@@ -86,7 +87,7 @@ class MaterialController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $material = material::findOrFail($id);
+        $material = Material::findOrFail($id);
         $material->update($request->all());
         return redirect('basic/materials');
     }

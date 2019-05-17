@@ -18,9 +18,11 @@ class CreateMaterialsTable extends Migration
 
             $table->string('number')->unique();
             $table->string('name')->nullable();
-            $table->integer('material_cats_id')->nullable();
+            $table->integer('material_cat_id')->nullable();
             $table->string('note')->nullable();
             $table->timestamps();
+
+            $table->foreign('material_cat_id')->references('id')->on('material_cats');
         });
     }
 
