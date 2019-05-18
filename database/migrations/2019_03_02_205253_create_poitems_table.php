@@ -17,19 +17,18 @@ class CreatePoitemsTable extends Migration
             $table->increments('id');
 
 //            $table->integer('status')->default(0);
-            $table->integer('pohead_id')->nullable();
-            $table->integer('poitemc_id')->nullable();
+            $table->integer('pohead_id');
+            $table->integer('material_id');
 //            $table->date('duedate')->nullable();
-            $table->decimal('quantity', 18, 4)->default(0.0);
-            $table->decimal('quantityreceived', 18, 4)->default(0.0);
-//            $table->decimal('unitprice', 16, 6)->nullable();
+            $table->decimal('quantity')->default(0.0);
+            $table->decimal('unitprice')->nullable();
             $table->string('remark')->nullable();
 //            $table->decimal('freight', 16, 4)->default(0.0);
 
             $table->timestamps();
 
             $table->foreign('pohead_id')->references('id')->on('poheads')->onDelete('cascade');
-            $table->foreign('poitemc_id')->references('id')->on('poitemcs');
+            $table->foreign('material_id')->references('id')->on('materials');
         });
     }
 

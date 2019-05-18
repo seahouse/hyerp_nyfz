@@ -9,9 +9,9 @@ class Poitem extends Model
     //
     protected $fillable = [
         'pohead_id',
-        'poitemc_id',
+        'material_id',
         'quantity',
-        'quantityreceived',
+        'unitprice',
         'remark',
     ];
 
@@ -20,8 +20,8 @@ class Poitem extends Model
 //        return $this->hasOne('App\Models\Purchaseorderc\Poitemc', 'id', 'poitemc_id');
     }
 
-    public function poitemc() {
-        return $this->belongsTo('App\Models\Purchaseorderc\Poitemc');
+    public function material() {
+        return $this->belongsTo('App\Models\Basic\Material');
 //        return $this->hasOne('App\Models\Purchaseorderc\Poitemc', 'id', 'poitemc_id');
     }
 

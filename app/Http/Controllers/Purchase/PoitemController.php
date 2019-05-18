@@ -25,9 +25,10 @@ class PoitemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($pohead_id)
     {
         //
+        return view('purchase.poitems.create', compact('pohead_id'));
     }
 
     /**
@@ -39,6 +40,9 @@ class PoitemController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->all();
+        Poitem::create($input);
+        return redirect('purchase/purchaseorders/' . $input['pohead_id'] . '/detail');
     }
 
     /**
@@ -62,8 +66,8 @@ class PoitemController extends Controller
     {
         //
         $poitem = Poitem::findOrFail($id);
-        $headId = $poitem->pohead_id;
-        return view('purchase.poitems.edit', compact('poitem', 'headId'));
+        $pohead_id = $poitem->pohead_id;
+        return view('purchase.poitems.edit', compact('poitem', 'pohead_id'));
     }
 
     /**

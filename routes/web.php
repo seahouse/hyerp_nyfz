@@ -41,11 +41,14 @@ Route::group(['prefix' => 'inventory', 'namespace' => 'Inventory', 'middleware' 
 });
 
 Route::group(['prefix' => 'basic', 'namespace' => 'Basic', 'middleware' => ['web', 'auth']], function() {
-    Route::resource('material_cats', 'Material_catController');
-    Route::resource('materials', 'MaterialController');
     Route::group(['prefix' => 'material_cats'], function() {
         Route::get('getitemsbykey/{key}', 'Material_catController@getitemsbykey');
     });
+    Route::resource('material_cats', 'Material_catController');
+    Route::group(['prefix' => 'materials'], function() {
+        Route::get('getitemsbykey/{key}', 'MaterialController@getitemsbykey');
+    });
+    Route::resource('materials', 'MaterialController');
 });
 
 Route::group(['prefix' => 'sales', 'namespace' => 'Sales', 'middleware' => ['web', 'auth']], function() {
@@ -156,6 +159,7 @@ Route::group(['prefix' => 'purchase', 'namespace' => 'Purchase', 'middleware' =>
         Route::post('packingstore', 'PoitemController@packingstore');
         Route::get('getitemsbypoheadid/{pohead}', 'PoitemController@getitemsbypoheadid');
     });
+    Route::get('poitems/{pohead}/create', 'PoitemController@create');
     Route::group(['prefix' => 'poitems/{poitem}'], function () {
         Route::get('poitemrolls', 'PoitemController@poitemrolls');
     });

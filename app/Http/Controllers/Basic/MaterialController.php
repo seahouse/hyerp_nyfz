@@ -20,6 +20,13 @@ class MaterialController extends Controller
         return view('basic.materials.index', compact('materials'));
     }
 
+    public function getitemsbykey($key)
+    {
+
+        $materials = Material::where('name', 'like', '%' . $key . '%')->paginate(20);
+        return $materials;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
