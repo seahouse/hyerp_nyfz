@@ -14,6 +14,7 @@ class Purchaseorder extends Model
         'descrip',
         'vendor_id',
         'orderdate',
+        'total_amount',
         'status',
         'poheadc_id',
     ];

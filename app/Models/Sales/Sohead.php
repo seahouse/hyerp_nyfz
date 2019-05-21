@@ -13,6 +13,8 @@ class Sohead extends Model
         'customer_id',
         'orderdate',
         'salesmanager_id',
+        'total_amount',
+        'duedate',
     ];
 
     public function customer() {

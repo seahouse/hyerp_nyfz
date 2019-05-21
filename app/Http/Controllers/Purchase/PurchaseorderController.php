@@ -50,8 +50,17 @@ class PurchaseorderController extends Controller
         ]);
 
         $input = $request->all();
-//        dd($input);
-        Purchaseorder::create($input);
+        //dd($input);
+        $pohead = Purchaseorder::create($input);
+
+        if ($request->has('sohead_id') && $request->input('sohead_id')> 0 && isset($pohead))
+        {
+            $sohead_pohead = new Sohead_Pohead;
+            $sohead_pohead->sohead_id = $request->input('sohead_id');
+            $sohead_pohead->pohead_id = $pohead->id;
+            $sohead_pohead->save();
+
+        }
 
         return redirect('purchase/purchaseorders');
     }
@@ -71,6 +80,7 @@ class PurchaseorderController extends Controller
 //            'drawingattachments.*'  => 'required|file',
 //            'images.*'                => 'required|image',
         ]);
+
         $input = $request->all();
 
         // 判断明细数量是否超量，前端已有余量显示，但如果存在多人操作系统，前端的显示不会实时刷新，所以这里继续判断

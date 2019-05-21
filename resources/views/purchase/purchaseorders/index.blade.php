@@ -19,6 +19,7 @@
                 <th>采购订单名称</th>
                 <th>供应商</th>
                 <th>对应销售订单</th>
+                <th>订单金额</th>
                 <th>物料</th>
                 <th>操作</th>
             </tr>
@@ -37,6 +38,9 @@
                     </td>
                     <td>
                         @if(isset($purchaseorder->soheads->first()->name)) {{ $purchaseorder->soheads->first()->name }} @else - @endif
+                    </td>
+                    <td>
+                        {{ $purchaseorder->total_amount }}
                     </td>
                     <td>
                         <a href="{{ URL::to('/purchase/purchaseorders/' . $purchaseorder->id . '/detail') }}" target="_blank">明细</a>

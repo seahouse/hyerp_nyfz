@@ -37,6 +37,13 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('total_amount', '订单金额:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
+    <div class='col-xs-8 col-sm-10'>
+        {!! Form::text('total_amount', null, ['class' => 'form-control', $attr]) !!}
+    </div>
+</div>
+
+<div class="form-group">
     {!! Form::label('orderdate', '采购订单日期:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
         {!! Form::date('orderdate', null, ['class' => 'form-control', $attr]) !!}

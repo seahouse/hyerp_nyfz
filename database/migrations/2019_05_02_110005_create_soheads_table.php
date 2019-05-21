@@ -25,7 +25,8 @@ class CreateSoheadsTable extends Migration
             $table->integer('salesmanager_id')->nullable();
 //            $table->integer('term_id')->nullable();
 //            $table->string('comments')->nullable();
-
+            $table->decimal('total_amount')->nullable();
+            $table->date('duedate')->nullable();
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customers');

@@ -43,6 +43,8 @@
                     <th>编号</th>
                     <th>客户名称</th>
                     <th>订单日期</th>
+                    <th>采购金额</th>
+                    <th>到期日期</th>
                     <th>创建时间</th>
                     {{--<th>Detail</th>--}}
                     <th>操作</th>
@@ -59,6 +61,12 @@
                         </td>
                         <td>
                             @if (isset($sohead->orderdate)) {{ $sohead->orderdate }} @else @endif
+                        </td>
+                        <td>
+                            @if (isset($sohead->total_amount)) {{ $sohead->total_amount }} @else @endif
+                        </td>
+                        <td>
+                            @if (isset($sohead->duedate)) {{ $sohead->duedate }} @else @endif
                         </td>
                         <td>
                             {{ $sohead->created_at }}

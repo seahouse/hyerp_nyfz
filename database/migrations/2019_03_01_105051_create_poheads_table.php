@@ -31,6 +31,7 @@ class CreatePoheadsTable extends Migration
 //            $table->string('shiptoaddress')->nullable();
             $table->integer('status')->default(0);
             $table->integer('poheadc_id')->nullable();
+            $table->decimal('total_amount')->nullable();
 //            $table->date('releasedate')->nullable();
 
             $table->timestamps();
