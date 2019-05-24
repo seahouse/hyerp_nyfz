@@ -24,6 +24,13 @@ class ComposerServiceProvider extends ServiceProvider
             'changeuser'), function($view) {
             $view->with('userList', \App\User::where('email', '<>', 'admin@admin.com')->orderby('name', 'asc')->pluck('name', 'id'));
         });
+
+        // material_catList
+        view()->composer(array('basic.materials.create', 'basic.materials.edit',
+            'teaching.teachingadministrator.create', 'teaching.teachingadministrator.edit', 'purchase.payments.create_hxold',
+            'changeuser'), function($view) {
+            $view->with('material_catList', \App\Models\Basic\Material_cat::pluck('name', 'id'));
+        });
     }
 
     /**

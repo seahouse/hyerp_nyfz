@@ -15,12 +15,13 @@
 <div class="form-group">
     {!! Form::label('material_cat_name', '物料类别:',['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
-        @if (isset($material))
-            {!! Form::text('material_cat_name', $material->material_cat->name, ['class' => 'form-control', 'data-toggle' => 'modal', 'data-target' => '#selectMaterial_catModal', 'id' => 'material_cat_name']) !!}
-        @else
-            {!! Form::text('material_cat_name', null, ['class' => 'form-control', 'data-toggle' => 'modal', 'data-target' => '#selectMaterial_catModal',  'id' => 'material_cat_name']) !!}
-        @endif
-        {!! Form::hidden('material_cat_id', null, ['id' => 'material_cat_id']) !!}
+        {!! Form::select('material_cat_id', $material_catList, null, ['class' => 'form-control', 'placeholder' => '--请选择--']) !!}
+        {{--@if (isset($material))--}}
+            {{--{!! Form::text('material_cat_name', $material->material_cat->name, ['class' => 'form-control', 'data-toggle' => 'modal', 'data-target' => '#selectMaterial_catModal', 'id' => 'material_cat_name']) !!}--}}
+        {{--@else--}}
+            {{--{!! Form::text('material_cat_name', null, ['class' => 'form-control', 'data-toggle' => 'modal', 'data-target' => '#selectMaterial_catModal',  'id' => 'material_cat_name']) !!}--}}
+        {{--@endif--}}
+        {{--{!! Form::hidden('material_cat_id', null, ['id' => 'material_cat_id']) !!}--}}
     </div>
 </div>
 
