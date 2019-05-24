@@ -15,6 +15,7 @@ class Sohead extends Model
         'salesmanager_id',
         'total_amount',
         'duedate',
+        'drawing_completed',
     ];
 
     public function customer() {
