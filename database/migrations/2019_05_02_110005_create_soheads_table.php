@@ -27,6 +27,7 @@ class CreateSoheadsTable extends Migration
 //            $table->string('comments')->nullable();
             $table->decimal('total_amount')->nullable();
             $table->date('duedate')->nullable();
+            $table->boolean('drawing_completed')->default(false);
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customers');

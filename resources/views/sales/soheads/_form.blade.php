@@ -53,6 +53,13 @@
     {{--</div>--}}
 {{--</div>--}}
 
+<div class="form-group">
+    {!! Form::label('drawing_completed', '图纸完成状态:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
+    <div class='col-xs-8 col-sm-10'>
+        {!! Form::select('drawing_completed', array('1'=>'是', '0'=>'否'), null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+
 
 
 <div class="form-group">
