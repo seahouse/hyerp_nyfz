@@ -13,7 +13,7 @@ class CreateWarehouseinheadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('wareshouseinheads', function (Blueprint $table) {
+        Schema::create('warehouseinheads', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('number')->unique();
@@ -39,6 +39,6 @@ class CreateWarehouseinheadsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wareshouseinheads');
+        Schema::dropIfExists('warehouseinheads');
     }
 }

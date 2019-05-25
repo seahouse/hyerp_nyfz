@@ -154,6 +154,11 @@ Route::group(['prefix' => 'purchase', 'namespace' => 'Purchase', 'middleware' =>
 //    Route::group(['prefix' => 'poheadtaxrateass'], function() {
 //        Route::get('destorybyid/{id}', 'PoheadtaxrateassController@destorybyid');       // use get for page opt.
 //    });
+    Route::resource('warehouseinhead', 'WarehouseinheadController');
+    Route::group(['prefix' => 'warehouseinheaditems'], function () {
+        Route::get('getitemsbywareshouseoutid/{warehouseoutid}', 'WarehouseinheaditemController@getitemsbywareshouseoutid');
+    });
+
     Route::resource('purchaseorders', 'PurchaseorderController');
     Route::group(['prefix' => 'poitems'], function () {
         Route::post('packingstore', 'PoitemController@packingstore');

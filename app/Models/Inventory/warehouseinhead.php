@@ -15,4 +15,14 @@ class warehouseinhead extends Model
         'vendor_id',
         'remark',
     ];
+
+    public function warehouseinitem() {
+        return $this->hasMany('App\Models\Inventory\Warehouseinitem', 'warehouseinhead_id', 'id');
+    }
+
+    public function vendor() {
+        return $this->hasOne('App\Models\Purchase\Vendor', 'id', 'vendor_id');
+    }
+
+
 }

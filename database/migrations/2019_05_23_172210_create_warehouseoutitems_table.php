@@ -13,8 +13,9 @@ class CreateWarehouseoutitemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('wareshouseoutitems', function (Blueprint $table) {
+        Schema::create('warehouseoutitems', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('warehouseouthead_id')->unique();
             $table->integer('material_id')->unique();
             $table->decimal('quantity')->nullable();
             $table->integer('sohead_id')->nullable();
@@ -33,6 +34,6 @@ class CreateWarehouseoutitemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wareshouseoutitems');
+        Schema::dropIfExists('warehouseoutitems');
     }
 }

@@ -52,6 +52,8 @@
                     <ul class="dropdown-menu">
                         @can('module_inventory')
                         <li><a href="/inventory/warehouses">仓库</a></li>
+                        <li><a href="/inventory/warehouseinheads">入库单</a></li>
+                        <li><a href="/inventory/warehouseoutheads">出库单</a></li>
                         {{--<li role="separator" class="divider"></li>--}}
                         {{--@can('inventory_batch_search')--}}
                             {{--<li><a href="/inventory/report">报表</a></li>--}}

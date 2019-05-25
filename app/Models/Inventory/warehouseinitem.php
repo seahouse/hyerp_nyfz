@@ -8,6 +8,7 @@ class warehouseinitem extends Model
 {
     //
     protected $fillable = [
+        'warehouseinhead_id',
         'material_id',
         'quantity',
         'unitprice',
