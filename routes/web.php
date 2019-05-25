@@ -38,6 +38,10 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::group(['prefix' => 'inventory', 'namespace' => 'Inventory', 'middleware' => ['web', 'auth']], function() {
     Route::resource('warehouses', 'WarehouseController');
+    Route::resource('warehouseinheads', 'WarehouseinheadController');
+    Route::group(['prefix' => 'warehouseinheaditems'], function () {
+        Route::get('getitemsbywareshouseoutid/{warehouseoutid}', 'WarehouseinheaditemController@getitemsbywareshouseoutid');
+    });
 });
 
 Route::group(['prefix' => 'basic', 'namespace' => 'Basic', 'middleware' => ['web', 'auth']], function() {
@@ -154,10 +158,7 @@ Route::group(['prefix' => 'purchase', 'namespace' => 'Purchase', 'middleware' =>
 //    Route::group(['prefix' => 'poheadtaxrateass'], function() {
 //        Route::get('destorybyid/{id}', 'PoheadtaxrateassController@destorybyid');       // use get for page opt.
 //    });
-    Route::resource('warehouseinhead', 'WarehouseinheadController');
-    Route::group(['prefix' => 'warehouseinheaditems'], function () {
-        Route::get('getitemsbywareshouseoutid/{warehouseoutid}', 'WarehouseinheaditemController@getitemsbywareshouseoutid');
-    });
+
 
     Route::resource('purchaseorders', 'PurchaseorderController');
     Route::group(['prefix' => 'poitems'], function () {
