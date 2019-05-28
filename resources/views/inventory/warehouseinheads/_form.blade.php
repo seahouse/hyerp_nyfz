@@ -8,17 +8,17 @@
 <div class="form-group">
     {!! Form::label('date', '入库日期:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
-        {!! Form::text('date', null, ['class' => 'form-control', $attr]) !!}
+        {!! Form::date('date', null, ['class' => 'form-control', $attr]) !!}
     </div>
 </div>
 
 <div class="form-group">
     {!! Form::label('pohead_name', '对应采购订单:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
-        @if (isset($wareshouseinhead) && isset($wareshouseinhead->poheads->first()->name))
-            {!! Form::text('pohead_id', $wareshouseinhead->poheads->first()->name, ['class' => 'form-control', $attr, 'data-toggle' => 'modal', 'data-target' => '#selectpoheadModal', 'data-name' => 'pohead_name', 'data-id' => 'pohead_id']) !!}
+        @if (isset($warehouseinhead) && isset($warehouseinhead->pohead->number))
+            {!! Form::text('pohead_number', $warehouseinhead->pohead->number, ['class' => 'form-control', $attr, 'data-toggle' => 'modal', 'data-target' => '#selectPurchaseorderModal', 'id' => 'pohead_number']) !!}
         @else
-            {!! Form::text('pohead_id', null, ['class' => 'form-control', $attr, 'data-toggle' => 'modal', 'data-target' => '#selectpoheadModal', 'data-name' => 'pohead_name', 'data-id' => 'pohead_id']) !!}
+            {!! Form::text('pohead_number', null, ['class' => 'form-control', $attr, 'data-toggle' => 'modal', 'data-target' => '#selectPurchaseorderModal',  'id' => 'pohead_number']) !!}
         @endif
             {!! Form::hidden('pohead_id', null, ['id' => 'pohead_id']) !!}
     </div>
@@ -27,12 +27,19 @@
 <div class="form-group">
     {!! Form::label('vendor_name', '供应商:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
-        @if (isset($wareshouseinhead))
-            {!! Form::text('vendor_name', $wareshouseinhead->vendor->name, ['class' => 'form-control', $attr, 'data-toggle' => 'modal', 'data-target' => '#selectVendorModal', 'data-name' => 'vendor_name', 'data-id' => 'vendor_id']) !!}
+        @if (isset($warehouseinhead))
+            {!! Form::text('vendor_name', $warehouseinhead->vendor->name, ['class' => 'form-control', $attr, 'data-toggle' => 'modal', 'data-target' => '#selectVendorModal', 'data-name' => 'vendor_name', 'data-id' => 'vendor_id']) !!}
         @else
             {!! Form::text('vendor_name', null, ['class' => 'form-control', $attr, 'data-toggle' => 'modal', 'data-target' => '#selectVendorModal', 'data-name' => 'vendor_name', 'data-id' => 'vendor_id']) !!}
         @endif
         {!! Form::hidden('vendor_id', null, ['id' => 'vendor_id']) !!}
+    </div>
+</div>
+
+<div class="form-group">
+    {!! Form::label('warehouse_name', '储存地:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
+    <div class='col-xs-8 col-sm-10'>
+        {!! Form::select('warehouse_id', $warehouse_List, null, ['class' => 'form-control', 'placeholder' => '--请选择--']) !!}
     </div>
 </div>
 

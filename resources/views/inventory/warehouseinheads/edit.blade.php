@@ -4,8 +4,8 @@
     <h1>编辑</h1>
     <hr/>
     
-    {!! Form::model($purchaseorder, ['method' => 'PATCH', 'action' => ['Purchase\PurchaseorderController@update', $purchaseorder->id], 'class' => 'form-horizontal']) !!}
-        @include('purchase.purchaseorders._form',
+    {!! Form::model($warehouseinhead, ['method' => 'PATCH', 'action' => ['Inventory\WarehouseinheadController@update', $warehouseinhead->id], 'class' => 'form-horizontal']) !!}
+        @include('inventory.warehouseinheads._form',
             [
                 'submitButtonText' => '保存',
                 'attr' => '',
@@ -15,14 +15,14 @@
     
     @include('errors.list')
 
-    @include('sales.soheads._selectsalesordermodal')
+    @include('purchase.purchaseorders._selectpoheadmodal')
     @include('purchase.vendors._selectvendormodal')
 @endsection
 
 @section('script')
-    @component('sales.soheads._selectsalesorderjs')
-        $("#sohead_name").val(field.name);
-        $("#sohead_id").val(field.id);
+    @component('purchase.purchaseorders._selectpoheadjs')
+        $("#pohead_name").val(field.name);
+        $("#pohead_id").val(field.id);
     @endcomponent
 
     {{--@include('sales.soheads._selectsalesorderjs')--}}

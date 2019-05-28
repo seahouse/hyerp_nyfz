@@ -19,6 +19,7 @@
                 <th>入库日期</th>
                 <th>对应采购订单</th>
                 <th>对应供应商</th>
+                <th>对应仓库</th>
                 <th>物料</th>
                 <th>操作</th>
             </tr>
@@ -33,10 +34,13 @@
                         {{ $warehouseinhead->date }}
                     </td>
                     <td>
-                        {{ $warehouseinhead->pohead->number }}
+                        @if(isset($warehouseinhead->pohead->number)) {{ $warehouseinhead->pohead->number }} @else - @endif
                     </td>
                     <td>
-                        {{ $warehouseinhead->vendor->name }}
+                        @if(isset($warehouseinhead->vendor->name)) {{ $warehouseinhead->vendor->name }} @else - @endif
+                    </td>
+                    <td>
+                        @if(isset($warehouseinhead->warehouse->name)) {{ $warehouseinhead->warehouse->name }} @else - @endif
                     </td>
                     <td>
                         <a href="{{ URL::to('/inventory/warehouseinheads/' . $warehouseinhead->id . '/detail') }}" target="_blank">明细</a>

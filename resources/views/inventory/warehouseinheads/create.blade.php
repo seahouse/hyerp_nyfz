@@ -1,11 +1,11 @@
 @extends('navbarerp')
 
 @section('main')
-    <h1>添加采购订单</h1>
+    <h1>添加入库单</h1>
     <hr/>
     
-    {!! Form::open(['url' => 'purchase/purchaseorders', 'class' => 'form-horizontal']) !!}
-        @include('purchase.purchaseorders._form',
+    {!! Form::open(['url' => 'inventory/warehouseinheads', 'class' => 'form-horizontal']) !!}
+        @include('inventory.warehouseinheads._form',
             [
                 'submitButtonText' => '添加',
                 'attr'  => '',
@@ -14,14 +14,14 @@
     
 
     @include('errors.list')
-    @include('sales.soheads._selectsalesordermodal')
+    @include('purchase.purchaseorders._selectpoheadmodal')
     @include('purchase.vendors._selectvendormodal')
 @stop
 
 @section('script')
-    @component('sales.soheads._selectsalesorderjs')
-        $("#sohead_name").val(field.name);
-        $("#sohead_id").val(field.id);
+    @component('purchase.purchaseorders._selectpoheadjs')
+        $("#pohead_name").val(field.name);
+        $("#pohead_id").val(field.id);
     @endcomponent
 
     @include('purchase.vendors._selectvendorjs')

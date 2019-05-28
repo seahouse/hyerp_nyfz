@@ -31,6 +31,12 @@ class ComposerServiceProvider extends ServiceProvider
             'changeuser'), function($view) {
             $view->with('material_catList', \App\Models\Basic\Material_cat::pluck('name', 'id'));
         });
+
+        //warehouse_List
+        view()->composer(array('inventory.warehouseinheads.create', 'inventory.warehouseinheads.edit','inventory.warehouseoutheads.create', 'inventory.warehouseoutheads.edit',
+            ), function($view) {
+            $view->with('warehouse_List', \App\Models\Inventory\Warehouse::pluck('name', 'id'));
+        });
     }
 
     /**
