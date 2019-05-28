@@ -2,7 +2,7 @@
 
 @section('main')
     <div class="panel-heading">
-        <a href="{{ URL::to('inventory/warehouseinheaditms/' . $id . '/create') }}" class="btn btn-sm btn-success">新建</a>
+        <a href="{{ URL::to('inventory/warehouseinitems/' . $id . '/create') }}" class="btn btn-sm btn-success">新建</a>
 {{--        <div class="pull-right" style="padding-top: 4px;">
             <a href="{{ URL::to('purchase/vendtypes') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> {{'客户类型管理', [], 'layouts'}}</a>
         </div> --}}
@@ -46,8 +46,8 @@
                         {{--{{ $poitem->qty_received }}--}}
                     {{--</td>--}}
                     <td>
-                        <a href="{{ URL::to('/inventory/warehouseinheaditems/'.$poitem->id.'/edit') }}" class="btn btn-success btn-sm pull-left">编辑</a>
-                        {!! Form::open(array('route' => array('poitems.destroy', $poitem->id), 'method' => 'delete', 'onsubmit' => 'return confirm("确定删除此记录?");')) !!}
+                        <a href="{{ URL::to('/inventory/warehouseinitems/'.$poitem->id.'/edit') }}" class="btn btn-success btn-sm pull-left">编辑</a>
+                        {!! Form::open(array('route' => array('warehouseinitems.destroy', $warehouseinitem->id), 'method' => 'delete', 'onsubmit' => 'return confirm("确定删除此记录?");')) !!}
                             {!! Form::submit('删除', ['class' => 'btn btn-danger btn-sm']) !!}
                         {!! Form::close() !!}
                     </td>
@@ -56,7 +56,7 @@
         </tbody>
 
     </table>
-    {!! $poitems->render() !!}
+    {!! $warehouseinitems->render() !!}
     @else
     <div class="alert alert-warning alert-block">
         <i class="fa fa-warning"></i>
