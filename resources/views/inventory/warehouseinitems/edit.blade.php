@@ -4,8 +4,8 @@
     <h1>编辑</h1>
     <hr/>
     
-    {!! Form::model($poitem, ['method' => 'PATCH', 'action' => ['Purchase\PoitemController@update', $poitem->id], 'class' => 'form-horizontal']) !!}
-        @include('purchase.poitems._form',
+    {!! Form::model($warehouseinitem, ['method' => 'PATCH', 'action' => ['Inventory\WarehouseinitemController@update', $warehouseinitem->id], 'class' => 'form-horizontal']) !!}
+        @include('inventory.warehouseinitems._form',
             [
                 'submitButtonText' => '保存',
                 'attr' => '',

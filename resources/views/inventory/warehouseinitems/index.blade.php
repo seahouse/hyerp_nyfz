@@ -9,7 +9,7 @@
     </div>
     
 
-    @if ($poitems->count())
+    @if ($warehouseinitems->count())
     <table class="table table-striped table-hover table-condensed">
         <thead>
             <tr>
@@ -19,8 +19,7 @@
                 <th>单价</th>
                 <th>总价</th>
                 <th>税率</th>
-                {{--<th>运费</th>--}}
-                {{--<th>已收货</th>--}}
+                <th>备注</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -39,14 +38,17 @@
                     <td>
                         {{ $warehouseinitem->unitprice }}
                     </td>
-                    {{--<td>--}}
-                        {{--{{ $poitem->freight }}--}}
-                    {{--</td>--}}
-                    {{--<td>--}}
-                        {{--{{ $poitem->qty_received }}--}}
-                    {{--</td>--}}
                     <td>
-                        <a href="{{ URL::to('/inventory/warehouseinitems/'.$poitem->id.'/edit') }}" class="btn btn-success btn-sm pull-left">编辑</a>
+                        {{ $warehouseinitem->amount }}
+                    </td>
+                    <td>
+                        {{ $warehouseinitem->taxrate }}
+                    </td>
+                    <td>
+                        {{ $warehouseinitem->remark }}
+                    </td>
+                    <td>
+                        <a href="{{ URL::to('/inventory/warehouseinitems/'.$warehouseinitem->id.'/edit') }}" class="btn btn-success btn-sm pull-left">编辑</a>
                         {!! Form::open(array('route' => array('warehouseinitems.destroy', $warehouseinitem->id), 'method' => 'delete', 'onsubmit' => 'return confirm("确定删除此记录?");')) !!}
                             {!! Form::submit('删除', ['class' => 'btn btn-danger btn-sm']) !!}
                         {!! Form::close() !!}

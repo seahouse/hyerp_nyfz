@@ -39,9 +39,14 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['prefix' => 'inventory', 'namespace' => 'Inventory', 'middleware' => ['web', 'auth']], function() {
     Route::resource('warehouses', 'WarehouseController');
     Route::resource('warehouseinheads', 'WarehouseinheadController');
-    Route::group(['prefix' => 'warehouseinheaditems'], function () {
-        Route::get('getitemsbywareshouseoutid/{warehouseoutid}', 'WarehouseinheaditemController@getitemsbywareshouseoutid');
+    Route::group(['prefix' => 'warehouseinitems'], function () {
+        Route::get('getitemsbywareshouseoutid/{warehouseoutid}', 'WarehouseinitemController@getitemsbywareshouseoutid');
     });
+    Route::group(['prefix' => 'warehouseinheads/{id}'], function () {
+        Route::get('detail', 'WarehouseinheadController@detail');
+    });
+    Route::get('warehouseinitems/{warehouseinhead_id}/create', 'WarehouseinitemController@create');
+    Route::resource('warehouseinitems', 'WarehouseinitemController');
 });
 
 Route::group(['prefix' => 'basic', 'namespace' => 'Basic', 'middleware' => ['web', 'auth']], function() {

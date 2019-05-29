@@ -1,11 +1,11 @@
 @extends('navbarerp')
 
 @section('main')
-    <h1>添加采购物料</h1>
+    <h1>添加入库信息</h1>
     <hr/>
     
-    {!! Form::open(['url' => 'purchase/poitems', 'class' => 'form-horizontal']) !!}
-        @include('purchase.poitems._form',
+    {!! Form::open(['url' => 'inventory/warehouseinitems', 'class' => 'form-horizontal']) !!}
+        @include('inventory.warehouseinitems._form',
             [
                 'attr' => '',
                 'submitButtonText' => '添加'
