@@ -17,7 +17,7 @@ class CreateWarehouseoutheadsTable extends Migration
             $table->increments('id');
 
             $table->string('number')->unique();
-            $table->datetime('date')->nullable();
+            $table->date('date')->nullable();
             $table->string('type')->nullable();
             $table->integer('warehouse_id')->nullable();
             $table->string('remark')->nullable();

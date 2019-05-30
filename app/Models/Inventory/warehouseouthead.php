@@ -14,4 +14,8 @@ class warehouseouthead extends Model
         'warehouse_id',
         'remark',
     ];
+
+    public function warehouse() {
+        return $this->hasOne('App\Models\Inventory\Warehouse', 'id', 'warehouse_id');
+    }
 }

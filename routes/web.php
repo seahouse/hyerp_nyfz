@@ -40,13 +40,24 @@ Route::group(['prefix' => 'inventory', 'namespace' => 'Inventory', 'middleware' 
     Route::resource('warehouses', 'WarehouseController');
     Route::resource('warehouseinheads', 'WarehouseinheadController');
     Route::group(['prefix' => 'warehouseinitems'], function () {
-        Route::get('getitemsbywareshouseoutid/{warehouseoutid}', 'WarehouseinitemController@getitemsbywareshouseoutid');
+        Route::get('getitemsbywareshouseinid/{warehouseinid}', 'WarehouseinitemController@getitemsbywareshouseinid');
     });
     Route::group(['prefix' => 'warehouseinheads/{id}'], function () {
         Route::get('detail', 'WarehouseinheadController@detail');
     });
     Route::get('warehouseinitems/{warehouseinhead_id}/create', 'WarehouseinitemController@create');
     Route::resource('warehouseinitems', 'WarehouseinitemController');
+
+    Route::resource('warehouseoutheads', 'WarehouseoutheadController');
+    Route::group(['prefix' => 'warehouseoutitems'], function () {
+        Route::get('getitemsbywareshouseoutid/{warehouseoutid}', 'WarehouseoutitemController@getitemsbywareshouseoutid');
+    });
+    Route::group(['prefix' => 'warehouseoutheads/{id}'], function () {
+        Route::get('detail', 'WarehouseoutheadController@detail');
+    });
+    Route::get('warehouseoutitems/{warehouseouthead_id}/create', 'WarehouseoutitemController@create');
+    Route::resource('warehouseoutitems', 'WarehouseoutitemController');
+
 });
 
 Route::group(['prefix' => 'basic', 'namespace' => 'Basic', 'middleware' => ['web', 'auth']], function() {
