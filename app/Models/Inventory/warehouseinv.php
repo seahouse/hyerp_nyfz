@@ -13,4 +13,6 @@ class warehouseinv extends Model
         'quantity',
         'remark',
     ];
+
+
 }
