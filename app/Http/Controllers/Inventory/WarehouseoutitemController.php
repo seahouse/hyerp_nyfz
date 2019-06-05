@@ -47,12 +47,17 @@ class WarehouseoutitemController extends Controller
 
         if ($request->has('warehouseouthead_id') && $request->input('warehouseouthead_id')> 0 && isset($warehouseitem))
         {
-            $warehouseinv=new warehouseinv();
-            $warehouseinv_quantity=$warehouseinv->quantity;
+            $warehouseouthead_id=$request->input('warehouseouthead_id');
+            $warehouseinv = warehouseinv::where('material_id', $warehouseouthead_id)->first();
 
+            $warehouseinv_quantity=$warehouseinv->quanttity;
+
+            $this->validate($request, [
+                'quantity' => 'number|between:0,$warehouseinv_quantity',
+            ]);
 
             $warehouseinv->material_id = $request->input('material_id');
-            $warehouseinv->quantity =  $warehouseinv_quantity - $request->input('quantity');
+            $warehouseinv->quantity =  $warehouseinv_quantity- $request->input('quantity');
             $warehouseinv->remark = 'warehouseoutsheet:' . $request->input('warehouseouthead_id') ;
 
             $id=$request->input('warehouseouthead_id');
@@ -114,8 +119,13 @@ class WarehouseoutitemController extends Controller
 
         if ($request->has('warehouseouthead_id') && $request->input('warehouseouthead_id')> 0 && isset($warehouseoutitem))
         {
-            $warehouseinv=new warehouseinv();
+
+            $warehouseinv = warehouseinv::where('material_id', $request->input('material_id'))->first();
             $warehouseinv_quantity=$warehouseinv->quantity;
+
+            $this->validate($request, [
+                'quantity' => 'number|between:0,$warehouseinv_quantity',
+            ]);
             $warehouseinv_oldquantity=$request->old('quantity');
 
             $warehouseinv->material_id = $request->input('material_id');
@@ -152,7 +162,37 @@ class WarehouseoutitemController extends Controller
         //
         $warehouseoutitem = warehouseoutitem::findOrFail($id);
         $warehouseouthead_id = $warehouseoutitem->warehouseouthead_id;
+        $material_id=$warehouseoutitem->material_id;
+
+
+        if ( isset($warehouseoutitem))
+        {
+            $warehouseinv = warehouseinv::where('material_id', $material_id)->first();
+
+            $warehouseoutitem_quantity=$warehouseoutitem->quanttity;
+
+            $warehouseinv->material_id = $material_id;
+            $warehouseinv->quantity =  $warehouseinv->quantity +  $warehouseoutitem_quantity;
+            $warehouseinv->remark = 'delete warehouseoutsheet:' . $warehouseouthead_id ;
+
+            $warehouseoutheads = warehouseouthead::latest('created_at')->where('warehouseouthead_id', $id);
+            $warehouseinv->warehouse_id = $warehouseoutheads->warehouse_id;
+
+            $warehouseinv->save();
+
+            $warehouseinvaccount = new warehouseinvaccount;
+            $warehouseinvaccount->material_id = $material_id;
+            $warehouseinvaccount->warehouseoutin_id = $warehouseouthead_id;
+            $warehouseinvaccount->quantity = $warehouseoutitem_quantity;
+            $warehouseinvaccount->date = Carbon::now();
+            $warehouseinvaccount->flag=-1;
+            $warehouseinvaccount->remark='delete warehouseoutsheet:'. $warehouseouthead_id;
+
+            $warehouseinvaccount->save();
+        }
+
         warehouseoutitem::destroy($id);
+
         return redirect('inventory/warehouseoutitems/'. $warehouseouthead_id . '/detail');
     }
 }

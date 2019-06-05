@@ -175,6 +175,37 @@ class WarehouseinitemController extends Controller
 
         $warehouseinitem = warehouseinitem::findOrFail($id);
         $warehouseinhead_id = $warehouseinitem->warehouseinhead_id;
+        $material_id=$warehouseinitem->material_id;
+
+        if ( isset($warehouseoutitem))
+        {
+            $warehouseinv = warehouseinv::where('material_id', $material_id)->first();
+
+            $warehouseinitem_quantity=$warehouseinitem->quanttity;
+            if($warehouseinv->quantity<$warehouseinitem_quantity)
+            {
+                $errormesssage='库存不足';
+                dd($errormesssage);
+            }
+            $warehouseinv->material_id = $material_id;
+            $warehouseinv->quantity =  $warehouseinv->quantity- $warehouseinitem_quantity;
+            $warehouseinv->remark = 'delete warehouseoutsheet:' . $warehouseinhead_id ;
+
+            $warehouseinheads = warehouseinhead::latest('created_at')->where('warehouseinhead_id', $id);
+            $warehouseinv->warehouse_id = $warehouseinheads->warehouse_id;
+
+            $warehouseinv->save();
+
+            $warehouseinvaccount = new warehouseinvaccount;
+            $warehouseinvaccount->material_id = $material_id;
+            $warehouseinvaccount->warehouseoutin_id = $warehouseinheads;
+            $warehouseinvaccount->quantity = $warehouseinitem_quantity;
+            $warehouseinvaccount->date = Carbon::now();
+            $warehouseinvaccount->flag=-1;
+            $warehouseinvaccount->remark='delete warehouseoutsheet:'. $warehouseinhead_id;
+
+            $warehouseinvaccount->save();
+        }
         warehouseinitem::destroy($id);
         return redirect('inventory/warehouseinheads/' . $warehouseinhead_id . '/detail');
     }
