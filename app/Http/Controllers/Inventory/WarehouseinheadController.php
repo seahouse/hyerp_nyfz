@@ -103,7 +103,14 @@ class WarehouseinheadController extends Controller
     public function destroy($id)
     {
         //
+        $warehouseinitem=warehouseinitem::where('warehouseinhead_id', $id)->first();
+        if(isset($$warehouseinitem))
+        {
+            $errormessags='此单据有明细，请删除明细之后，才能删除此单据';
+            dd($errormessags);
+        }
         warehouseinhead::destroy($id);
+
         return redirect('inventory/warehouseinheads');
     }
 }

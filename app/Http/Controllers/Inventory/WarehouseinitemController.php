@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Inventory;
 use App\Models\Inventory\warehouseinitem;
 use App\Models\Inventory\warehouseinv;
 use App\Models\Inventory\warehouseinvaccount;
-use App\Models\Inventory\warehouseiniheads;
+use App\Models\Inventory\warehouseinhead;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -50,9 +51,9 @@ class WarehouseinitemController extends Controller
 
         if ($request->has('warehouseinhead_id') && $request->input('warehouseinhead_id')> 0 && isset($warehouseitem))
         {
-            $warehouseinhead_id=$request->input('warehouseinhead_id');
+            $material_id=$request->input('material_id');
 
-            $warehouseinv = warehouseinv::where('material_id', $warehouseinhead_id)->first();
+            $warehouseinv = warehouseinv::where('material_id', $material_id)->first();
             if (!isset($warehouseinv))
             {
                 $warehouseinv = new warehouseinv();
@@ -66,19 +67,25 @@ class WarehouseinitemController extends Controller
             $warehouseinv->quantity = $request->input('quantity') + $warehouseinv_quantity;
             $warehouseinv->remark = 'warehouseinsheet:' . $request->input('warehouseinhead_id') ;
 
-            $id=$request->input('warehouseinhead_id');
-            $warehouseinheads = warehouseinhead::latest('created_at')->where('warehouseinhead_id', $id);
-            $warehouseinv->warehouse_id = $warehouseinheads->warehouse_id;
+            $warehouseinhead_id=$request->input('warehouseinhead_id');
+//            $warehouseinhead = warehouseinhead::latest('created_at')->where('id', $warehouseinhead_id)->first();
+            $warehouseinhead = warehouseinhead::find($warehouseinhead_id);
+//            dd($warehouseinheads);
+            if(isset($warehouseinhead))
+                $warehouseinv->warehouse_id = $warehouseinhead->warehouse_id;
+
+
 
             $warehouseinv->save();
 
             $warehouseinvaccount = new warehouseinvaccount;
             $warehouseinvaccount->material_id = $request->input('material_id');
-            $warehouseinvaccount->warehouseoutin_id = $warehouseinheads->warehouse_id;
+            $warehouseinvaccount->warehouseoutin_id = $warehouseinhead_id;
             $warehouseinvaccount->quantity = $request->input('quantity');
             $warehouseinvaccount->date = Carbon::now();
             $warehouseinvaccount->flag=1;
-            $warehouseinvaccount->remark='warehouseinsheet:'. $warehouseinheads->warehouse_id;
+            $warehouseinvaccount->remark='warehouseinsheet:'. $warehouseinhead_id;
+            $warehouseinvaccount->warehouse_id=$warehouseinhead->warehouse_id;
 
             $warehouseinvaccount->save();
         }
@@ -143,19 +150,22 @@ class WarehouseinitemController extends Controller
             $warehouseinv->quantity = $request->input('quantity') + $warehouseinv_quantity - $warehouseinv_oldquantity;
             $warehouseinv->remark = 'update warehouseinsheet:' . $request->input('warehouseinhead_id') ;
 
-            $id=$request->input('warehouseinhead_id');
-            $warehouseinheads = warehouseinhead::latest('created_at')->where('warehouseinhead_id', $id);
-            $warehouseinv->warehouse_id = $warehouseinheads->warehouse_id;
+            $warehouseinhead_id=$request->input('warehouseinhead_id');
+            $warehouseinheads = warehouseinhead::find($warehouseinhead_id);
+            if(isset($warehouseinheads))
+                $warehouseinv->warehouse_id = $warehouseinheads->warehouse_id;
+
 
             $warehouseinv->save();
 
             $warehouseinvaccount = new warehouseinvaccount;
             $warehouseinvaccount->material_id = $request->input('material_id');
-            $warehouseinvaccount->warehouseoutin_id = $warehouseinheads->warehouse_id;
+            $warehouseinvaccount->warehouseoutin_id = $id;
             $warehouseinvaccount->quantity = $request->input('quantity');
             $warehouseinvaccount->date = Carbon::now();
             $warehouseinvaccount->flag=1;
-            $warehouseinvaccount->remark='update warehouseinsheet:'. $warehouseinheads->warehouse_id;
+            $warehouseinvaccount->remark='update warehouseinsheet:'. $id;
+            $warehouseinvaccount->warehouse_id=$warehouseinhead->warehouse_id;
 
             $warehouseinvaccount->save();
         }
@@ -191,8 +201,9 @@ class WarehouseinitemController extends Controller
             $warehouseinv->quantity =  $warehouseinv->quantity- $warehouseinitem_quantity;
             $warehouseinv->remark = 'delete warehouseoutsheet:' . $warehouseinhead_id ;
 
-            $warehouseinheads = warehouseinhead::latest('created_at')->where('warehouseinhead_id', $id);
-            $warehouseinv->warehouse_id = $warehouseinheads->warehouse_id;
+            $warehouseinheads = warehouseinhead::find($warehouseinhead_id);
+            if(isset($warehouseinheads))
+                $warehouseinv->warehouse_id = $warehouseinheads->warehouse_id;
 
             $warehouseinv->save();
 
@@ -203,6 +214,7 @@ class WarehouseinitemController extends Controller
             $warehouseinvaccount->date = Carbon::now();
             $warehouseinvaccount->flag=-1;
             $warehouseinvaccount->remark='delete warehouseoutsheet:'. $warehouseinhead_id;
+            $warehouseinvaccount->warehouse_id = $warehouseinheads->warehouse_id;
 
             $warehouseinvaccount->save();
         }

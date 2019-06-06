@@ -15,8 +15,8 @@ class CreateWarehouseinitemsTable extends Migration
     {
         Schema::create('warehouseinitems', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('warehouseinhead_id')->unique();
-            $table->integer('material_id')->unique();
+            $table->integer('warehouseinhead_id');
+            $table->integer('material_id');
             $table->decimal('quantity')->nullable();;
             $table->decimal('unitprice')->nullable();;
             $table->decimal('amount')->nullable();;
