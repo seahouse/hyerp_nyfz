@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Inventory;
 
 use App\Models\Inventory\warehouseinv;
+use App\Models\Inventory\warehouseinvaccount;
+use App\Models\Inventory\warehouseouthead;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Inventory\warehouseoutitem;
+use Log;
 
 class WarehouseoutitemController extends Controller
 {
@@ -41,22 +45,25 @@ class WarehouseoutitemController extends Controller
     public function store(Request $request)
     {
         //
+        $warehouseinv_quantity = 0.0;
+        if ($request->has('material_id') && $request->input('material_id') > 0)
+        {
+            $warehouseinv = warehouseinv::where('material_id', $request->input('material_id'))->first();
+            if (isset($warehouseinv))
+                $warehouseinv_quantity=$warehouseinv->quantity;
+
+            $this->validate($request, [
+                'quantity' => 'numeric|max:' . $warehouseinv_quantity,
+            ]);
+        }
+
         $input = $request->all();
 //        dd($input);
         $warehouseitem=warehouseoutitem::create($input);
 
         if ($request->has('warehouseouthead_id') && $request->input('warehouseouthead_id')> 0 && isset($warehouseitem))
         {
-            $warehouseouthead_id=$request->input('warehouseouthead_id');
-            $warehouseinv = warehouseinv::where('material_id', $warehouseouthead_id)->first();
-
-            $warehouseinv_quantity=$warehouseinv->quanttity;
-
-            $this->validate($request, [
-                'quantity' => 'number|between:0,$warehouseinv_quantity',
-            ]);
-
-            $warehouseinv->material_id = $request->input('material_id');
+           $warehouseinv->material_id = $request->input('material_id');
             $warehouseinv->quantity =  $warehouseinv_quantity- $request->input('quantity');
             $warehouseinv->remark = 'warehouseoutsheet:' . $request->input('warehouseouthead_id') ;
 
@@ -78,7 +85,7 @@ class WarehouseoutitemController extends Controller
 
             $warehouseinvaccount->save();
         }
-        return redirect('inventory/warehouseoutitems/' . $input['warehouseouthead_id'] . '/detail');
+        return redirect('inventory/warehouseoutheads/' . $input['warehouseouthead_id'] . '/detail');
     }
 
     /**
