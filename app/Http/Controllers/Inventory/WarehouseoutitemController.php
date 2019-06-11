@@ -79,7 +79,7 @@ class WarehouseoutitemController extends Controller
             $warehouseinvaccount->warehouseoutin_id = $warehouseouthead_id;
             $warehouseinvaccount->quantity = $request->input('quantity');
             $warehouseinvaccount->date = Carbon::now();
-            $warehouseinvaccount->flag=-1;
+            $warehouseinvaccount->flag=2;
             $warehouseinvaccount->remark='warehouseoutsheet:'.$warehouseouthead_id;
             $warehouseinvaccount->warehouse_id = $warehouseoutheads->warehouse_id;
 
@@ -136,7 +136,7 @@ class WarehouseoutitemController extends Controller
             $this->validate($request, [
                 'quantity' => 'number|between:0,$warehouseinv_quantity',
             ]);
-            $warehouseinv_oldquantity=$request->old('quantity');
+            $warehouseinv_oldquantity=$warehouseoutitem->quantity;
 
             $warehouseinv->material_id = $request->input('material_id');
             $warehouseinv->quantity =  $warehouseinv_quantity - $request->input('quantity') - $warehouseinv_oldquantity;
@@ -154,7 +154,7 @@ class WarehouseoutitemController extends Controller
             $warehouseinvaccount->warehouseoutin_id = $warehouseouthead_id;
             $warehouseinvaccount->quantity = $request->input('quantity');
             $warehouseinvaccount->date = Carbon::now();
-            $warehouseinvaccount->flag=-1;
+            $warehouseinvaccount->flag=2;
             $warehouseinvaccount->remark='udpate warehouseoutsheet:'. $warehouseouthead_id;
             $warehouseinvaccount->warehouse_id = $warehouseoutheads->warehouse_id;
 
@@ -198,7 +198,7 @@ class WarehouseoutitemController extends Controller
             $warehouseinvaccount->warehouseoutin_id = $warehouseouthead_id;
             $warehouseinvaccount->quantity = $warehouseoutitem_quantity;
             $warehouseinvaccount->date = Carbon::now();
-            $warehouseinvaccount->flag=-1;
+            $warehouseinvaccount->flag=2;
             $warehouseinvaccount->remark='delete warehouseoutsheet:'. $warehouseouthead_id;
             $warehouseinvaccount->warehouse_id = $warehouseoutheads->warehouse_id;
 
