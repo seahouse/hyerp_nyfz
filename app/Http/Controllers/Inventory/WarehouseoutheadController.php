@@ -103,7 +103,7 @@ class WarehouseoutheadController extends Controller
     public function destroy($id)
     {
         //
-        $warehouseoutitem=warehouseoutitem::where('warehouseinhead_id', $id)->first();
+        $warehouseoutitem=warehouseoutitem::where('warehouseouthead_id', $id)->first();
         if(isset($warehouseoutitem))
         {
             $errormessags='此单据有明细，请删除明细之后，才能删除此单据';
