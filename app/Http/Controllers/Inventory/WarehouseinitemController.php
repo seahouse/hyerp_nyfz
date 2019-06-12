@@ -161,7 +161,7 @@ class WarehouseinitemController extends Controller
             $warehouseinv->update();
 
             $warehouseinvaccount = new warehouseinvaccount;
-            $warehouseinvaccount->material_id = $request->input('material_id');
+            $warehouseinvaccount->material_id = $material_id;
             $warehouseinvaccount->warehouseoutin_id = $warehouseinhead_id;
             $warehouseinvaccount->quantity = $request->input('quantity');
             $warehouseinvaccount->date = Carbon::now();
@@ -203,7 +203,7 @@ class WarehouseinitemController extends Controller
             $warehouseinv->material_id = $material_id;
             //dd($warehouseinv->quantity,$warehouseinitem_quantity);
             $warehouseinv->quantity =  $warehouseinv->quantity- $warehouseinitem_quantity;
-            $warehouseinv->remark = 'delete warehouseoutsheet:' . $warehouseinhead_id ;
+            $warehouseinv->remark = 'delete warehouseinsheet:' . $warehouseinhead_id ;
 
             $warehouseinheads =  warehouseinhead::find($warehouseinhead_id);
             if(isset($warehouseinheads))
@@ -217,7 +217,7 @@ class WarehouseinitemController extends Controller
             $warehouseinvaccount->quantity = $warehouseinitem_quantity;
             $warehouseinvaccount->date = Carbon::now();
             $warehouseinvaccount->flag=1;
-            $warehouseinvaccount->remark='delete warehouseoutsheet:'. $warehouseinhead_id;
+            $warehouseinvaccount->remark='delete warehouseinsheet:'. $warehouseinhead_id;
             $warehouseinvaccount->warehouse_id = $warehouseinheads->warehouse_id;
 
             $warehouseinvaccount->save();
