@@ -30,7 +30,6 @@ class CreatePoheadsTable extends Migration
 //            $table->integer('shipto_account_id')->nullable();
 //            $table->string('shiptoaddress')->nullable();
             $table->integer('status')->default(0);
-            $table->integer('poheadc_id')->nullable();
             $table->decimal('total_amount')->nullable();
 //            $table->date('releasedate')->nullable();
 
@@ -40,7 +39,6 @@ class CreatePoheadsTable extends Migration
 //            $table->foreign('term_id')->references('id')->on('terms');
 //            $table->foreign('vend_contact_id')->references('id')->on('contacts');
 //            $table->foreign('shipto_account_id')->references('id')->on('contacts');
-            $table->foreign('poheadc_id')->references('id')->on('poheadcs');
             $table->unique('number');
         });
     }
