@@ -100,16 +100,6 @@
                         @endcan
                     </ul>
                 </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">出运单(Shipment Management)<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            @can('module_shipment')
-                                <li><a href="/shipment/shipments">出运单(Shipment)</a></li>
-                                {{--<li><a href="/purchase/asns">ASN</a></li>--}}
-                                {{--<li><a href="/purchase/vendors">供应商</a></li>--}}
-                            @endcan
-                        </ul>
-                    </li>
                 {{--<li class="dropdown">--}}
                     {{--<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">客户关系<span class="caret"></span></a>--}}
                     {{--<ul class="dropdown-menu">--}}
