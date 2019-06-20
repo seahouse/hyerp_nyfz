@@ -59,7 +59,7 @@ class ReceiptController extends Controller
         Receipt::create($input);
 
         if ($request->has('sohead_id') && $request->input('sohead_id') > 0)
-            return redirect('finance/receipts/') . '?sohead_id=' . $request->input('sohead_id');
+            return redirect('finance/receipts?sohead_id=' . $request->input('sohead_id'));
         else
             return redirect('finance/receipts/');
     }

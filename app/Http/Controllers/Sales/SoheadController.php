@@ -109,7 +109,6 @@ class SoheadController extends Controller
     public function createreceipt($sohead_id)
     {
         //
-        dd(redirect('finance/receipts/')) ;
 //        $receipts=Receipt::where('sohead_id',$sohead_id);
         return view('sales.soheads.createreceipt',compact('sohead_id'));
     }

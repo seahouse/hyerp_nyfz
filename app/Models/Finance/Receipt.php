@@ -16,8 +16,8 @@ class Receipt extends Model
         'remark',
     ];
 
-    public function phhead() {
-        return $this->hasMany('App\Models\Purchase\Purchaseorder', 'id', 'pohead_id');
+    public function sohead() {
+        return $this->belongsTo('App\Models\Sales\Sohead');
     }
 
     public function user() {
