@@ -1,10 +1,6 @@
 <script type="text/javascript">
     jQuery(document).ready(function(e) {
 
-
-
-
-
         $('#selectPurchaseorderModal').on('show.bs.modal', function (e) {
             $("#listsalesorders").empty();
 

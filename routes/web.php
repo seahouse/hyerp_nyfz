@@ -71,6 +71,10 @@ Route::group(['prefix' => 'basic', 'namespace' => 'Basic', 'middleware' => ['web
     Route::resource('materials', 'MaterialController');
 });
 
+Route::group(['prefix' => 'finance', 'namespace' => 'Finance', 'middleware' => ['web', 'auth']], function() {
+    Route::resource('payments', 'PaymentController');
+    Route::resource('receipts', 'ReceiptController');
+});
 Route::group(['prefix' => 'sales', 'namespace' => 'Sales', 'middleware' => ['web', 'auth']], function() {
 //    Route::group(['prefix' => 'groups'], function() {
 //        Route::get('{id}/mstatistics', 'GroupController@mstatistics');
@@ -86,6 +90,7 @@ Route::group(['prefix' => 'sales', 'namespace' => 'Sales', 'middleware' => ['web
 //        Route::get('mindex', 'SalesordersController@mindex');
 //        Route::get('getitembyid/{id}', 'SalesordersController@getitembyid');
         Route::get('getitemsbykey/{key}', 'SoheadController@getitemsbykey');
+        Route::get('{id}/createreceipt','SoheadController@createreceipt');
 //        Route::get('{id}/mstatistics', 'SalesordersController@mstatistics');
     });
     Route::resource('soheads', 'SoheadController');

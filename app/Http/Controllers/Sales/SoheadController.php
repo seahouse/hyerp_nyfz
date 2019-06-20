@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Sales;
 
+use App\Models\Finance\Receipt;
 use App\Models\Sales\Sohead;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -103,6 +104,16 @@ class SoheadController extends Controller
 
         return redirect('sales/soheads');
     }
+
+
+    public function createreceipt($sohead_id)
+    {
+        //
+        dd(redirect('finance/receipts/')) ;
+//        $receipts=Receipt::where('sohead_id',$sohead_id);
+        return view('sales.soheads.createreceipt',compact('sohead_id'));
+    }
+
 
     /**
      * Remove the specified resource from storage.

@@ -37,13 +37,13 @@
         {{--{!! Form::close() !!}--}}
 
         @if ($soheads->count())
-            <table class="table table-striped table-hover table-condensed">
+            <table class="table table-striped table-hover table-condensed ">
                 <thead>
                 <tr>
                     <th>编号</th>
                     <th>客户名称</th>
                     <th>订单日期</th>
-                    <th>采购金额</th>
+                    <th>销售金额</th>
                     <th>到期日期</th>
                     <th>创建时间</th>
                     {{--<th>Detail</th>--}}
@@ -78,9 +78,10 @@
                             <a href="{{ URL::to('/sales/soheads/'.$sohead->id.'/edit') }}" class="btn btn-success btn-sm pull-left">编辑</a>
                             {{--<a href="{{ URL::to('/shipment/shipments/'.$sohead->id.'/export') }}" class="btn btn-success btn-sm pull-left">导出</a>--}}
                             {!! Form::open(array('route' => array('soheads.destroy', $sohead->id), 'method' => 'delete', 'onsubmit' => 'return confirm("确定删除此记录?");')) !!}
-                            {!! Form::submit('删除', ['class' => 'btn btn-danger btn-sm']) !!}
+                            {!! Form::submit('删除', ['class' => 'btn btn-danger btn-sm pull-left']) !!}
                             {!! Form::close() !!}
-                        </td>
+                            <a href="{{ URL::to('/sales/soheads/'.$sohead->id.'/createreceipt') }}" class="btn btn-success btn-sm pull-left">收款</a>
+                        </td >
                     </tr>
                 @endforeach
                 </tbody>
