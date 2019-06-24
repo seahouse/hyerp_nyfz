@@ -174,6 +174,8 @@ Route::group(['prefix' => 'purchase', 'namespace' => 'Purchase', 'middleware' =>
         Route::get('getitemsbyorderkey/{key?}', 'PurchaseorderController@getitemsbyorderkey');
 //        Route::get('create_hx', 'PurchaseordersController@create_hx');
         Route::post('storeseperate', 'PurchaseorderController@storeseperate');
+
+        Route::get('{id}/createpayment','PurchaseorderController@createpayment');
 //        Route::post('search_hx', 'PurchaseordersController@search_hx');
     });
 //    Route::group(['prefix' => 'poheadtaxrateass'], function() {

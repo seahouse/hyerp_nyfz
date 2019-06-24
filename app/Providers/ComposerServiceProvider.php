@@ -39,13 +39,13 @@ class ComposerServiceProvider extends ServiceProvider
         });
 
         //user_List
-        view()->composer(array('sales.soheads.createreceipt',
+        view()->composer(array('sales.soheads.createreceipt','purchase.purchaseorders.createpayment',
         ), function($view) {
             $view->with('user_List', \App\User::pluck('name', 'id'));
         });
 
         //paymethod_List
-        view()->composer(array('sales.soheads.createreceipt',
+        view()->composer(array('sales.soheads.createreceipt','purchase.purchaseorders.createpayment',
         ), function($view) {
                 $view->with('paymethod_List', \App\Models\Basic\Paymethod::pluck('name','id'));
         });

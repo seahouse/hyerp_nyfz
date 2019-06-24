@@ -47,11 +47,13 @@
                     </td>
                     <td>
                         <a href="{{ URL::to('/purchase/purchaseorders/'.$purchaseorder->id.'/edit') }}" class="btn btn-success btn-sm pull-left">编辑</a>
+
                         {{--<a href="{{ URL::to('/purchase/purchaseorders/' . $purchaseorder->id . '/packing') }}" class="btn btn-success btn-sm pull-left" target="_blank">打包</a>--}}
                         {{--<a href="{{ URL::to('/purchase/purchaseorders/' . $purchaseorder->id . '/payments') }}" target="_blank" class="btn btn-success btn-sm pull-left">付款</a>--}}
                         {!! Form::open(array('route' => array('purchaseorders.destroy', $purchaseorder->id), 'method' => 'delete', 'onsubmit' => 'return confirm("确定删除此记录?");')) !!}
-                            {!! Form::submit('删除', ['class' => 'btn btn-danger btn-sm']) !!}
+                        {!! Form::submit('删除', ['class' => 'btn btn-danger btn-sm pull-left']) !!}
                         {!! Form::close() !!}
+                        <a href="{{ URL::to('/purchase/purchaseorders/'.$purchaseorder->id.'/createpayment') }}" class="btn btn-success btn-sm pull-left">付款</a>
                     </td>
                 </tr>
             @endforeach

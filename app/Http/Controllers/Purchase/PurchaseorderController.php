@@ -170,6 +170,12 @@ class PurchaseorderController extends Controller
         return redirect('purchase/purchaseorders');
     }
 
+    public function createpayment($pohead_id)
+    {
+        //
+        return view('purchase.purchaseorders.createpayment',compact('pohead_id'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
