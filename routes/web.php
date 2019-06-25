@@ -91,6 +91,7 @@ Route::group(['prefix' => 'sales', 'namespace' => 'Sales', 'middleware' => ['web
 //        Route::get('getitembyid/{id}', 'SalesordersController@getitembyid');
         Route::get('getitemsbykey/{key}', 'SoheadController@getitemsbykey');
         Route::get('{id}/createreceipt','SoheadController@createreceipt');
+        Route::get('{id}/indexreceipt','SoheadController@indexreceipt');
 //        Route::get('{id}/mstatistics', 'SalesordersController@mstatistics');
     });
     Route::resource('soheads', 'SoheadController');
@@ -176,6 +177,8 @@ Route::group(['prefix' => 'purchase', 'namespace' => 'Purchase', 'middleware' =>
         Route::post('storeseperate', 'PurchaseorderController@storeseperate');
 
         Route::get('{id}/createpayment','PurchaseorderController@createpayment');
+        Route::get('{id}/indexpayment','PurchaseorderController@indexpayment');
+
 //        Route::post('search_hx', 'PurchaseordersController@search_hx');
     });
 //    Route::group(['prefix' => 'poheadtaxrateass'], function() {

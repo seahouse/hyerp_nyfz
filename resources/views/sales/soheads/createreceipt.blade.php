@@ -36,7 +36,7 @@
         <div class="form-group">
             {!! Form::label('paymethod', '收款方式:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
             <div class='col-xs-8 col-sm-10'>
-                {!! Form::select('paymethod', $paymethod_List, null, ['class' => 'form-control', 'placeholder' => '--请选择--']) !!}
+                {!! Form::select('paymethod', array('电汇'=>'电汇', '汇票'=>'汇票', '本票'=>'本票','支票'=>'支票','现金'=>'现金',), null, ['class' => 'form-control', 'placeholder' => '--请选择--']) !!}
             </div>
         </div>
 

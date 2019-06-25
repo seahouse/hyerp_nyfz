@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Purchase;
 
+use App\Models\Finance\Payment;
 use App\Models\Purchase\Poitem;
 use App\Models\Purchase\Purchaseorder;
 use App\Models\Purchase\Sohead_Pohead;
@@ -174,6 +175,14 @@ class PurchaseorderController extends Controller
     {
         //
         return view('purchase.purchaseorders.createpayment',compact('pohead_id'));
+    }
+
+    public function indexpayment($pohead_id)
+    {
+        //
+        //dd($pohead_id);
+        $payments=Payment::where('pohead_id',$pohead_id)->paginate(10);
+        return view('purchase.purchaseorders.indexpayment',compact('payments'));
     }
 
     /**

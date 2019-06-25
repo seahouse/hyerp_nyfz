@@ -13,13 +13,12 @@ class ReceiptController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //
-//        $receipts = Receipt::latest('created_at')->paginate(10);
-        $receipts = $this->searchrequest($request);
-        $inputs = $request->all();
-        return view('finance.receipts.index', compact('receipts', 'inputs'));
+        $receipts = Receipt::latest('created_at')->paginate(10);
+
+        return view('finance.receipts.index', compact('receipts'));
     }
 
     private function searchrequest(Request $request)
@@ -84,7 +83,7 @@ class ReceiptController extends Controller
     public function edit($id)
     {
         //
-        $receipt = Receipt::where(sohead_id,$id)->first();
+        $receipt = Receipt::findOrFail($id);
         return view('finance.receipts.edit', compact('receipt'));
     }
 
@@ -100,7 +99,10 @@ class ReceiptController extends Controller
         //
         $receipt = Receipt::findOrFail($id);
         $receipt->update($request->all());
-        return redirect('finance/receipts/');
+        if ($request->has('sohead_id') && $request->input('sohead_id') > 0)
+            return redirect('finance/receipts?sohead_id=' . $request->input('sohead_id'));
+        else
+            return redirect('finance/receipts/');
     }
 
     /**

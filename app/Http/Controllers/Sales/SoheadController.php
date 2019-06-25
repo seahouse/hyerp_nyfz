@@ -112,7 +112,12 @@ class SoheadController extends Controller
         return view('sales.soheads.createreceipt',compact('sohead_id'));
     }
 
-
+    public function indexreceipt($sohead_id)
+    {
+        //
+        $receipts=Receipt::where('sohead_id',$sohead_id)->paginate(10);
+        return view('sales.soheads.indexreceipt',compact('receipts'));
+    }
     /**
      * Remove the specified resource from storage.
      *

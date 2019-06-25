@@ -81,6 +81,7 @@
                             {!! Form::submit('删除', ['class' => 'btn btn-danger btn-sm pull-left']) !!}
                             {!! Form::close() !!}
                             <a href="{{ URL::to('/sales/soheads/'.$sohead->id.'/createreceipt') }}" class="btn btn-success btn-sm pull-left">收款</a>
+                            <a href="{{ URL::to('/sales/soheads/'.$sohead->id.'/indexreceipt') }}" class="btn btn-success btn-sm pull-left">收款明细</a>
                         </td >
                     </tr>
                 @endforeach

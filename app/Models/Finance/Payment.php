@@ -23,4 +23,8 @@ class Payment extends Model
     public function user() {
         return $this->hasOne('App\User', 'id', 'operator_id');
     }
+
+    public function paymethodname() {
+        return $this->hasOne('App\Models\Basic\Paymethod', 'id', 'paymethod');
+    }
 }

@@ -43,8 +43,10 @@ class PaymentController extends Controller
         $input = $request->all();
         //dd($input);
         Payment::create($input);
-
-        return redirect('finance/payments/');
+        if ($request->has('pohead_id') && $request->input('pohead_id') > 0)
+            return redirect('finance/payments?pohead_id=' . $request->input('pohead_id'));
+        else
+            return redirect('finance/payments/');
     }
 
     /**
@@ -82,8 +84,13 @@ class PaymentController extends Controller
     {
         //
         $payment = Payment::findOrFail($id);
+//        dd($request->all());
+//        dd($request);
         $payment->update($request->all());
-        return redirect('finance/payments/');
+        if ($request->has('pohead_id') && $request->input('pohead_id') > 0)
+            return redirect('finance/payments?pohead_id=' . $request->input('pohead_id'));
+        else
+            return redirect('finance/payments/');
     }
 
     /**

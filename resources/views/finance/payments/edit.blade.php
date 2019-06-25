@@ -15,14 +15,13 @@
     
     @include('errors.list')
 
-    @include('purchase.purchaseorders._selectpoheadmodal')
 @endsection
 
 @section('script')
-    @component('purchase.purchaseorders._selectpoheadjs')
-        $("#pohead_name").val(field.name);
-        $("#pohead_id").val(field.id);
-    @endcomponent
+    {{--@component('purchase.purchaseorders._selectpoheadjs')--}}
+        {{--$("#pohead_name").val(field.name);--}}
+        {{--$("#pohead_id").val(field.id);--}}
+    {{--@endcomponent--}}
 
 
 @endsection

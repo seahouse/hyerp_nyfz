@@ -15,13 +15,5 @@
     
     @include('errors.list')
 
-    @include('sales.soheads._selectsalesordermodal')
-@endsection
-
-@section('script')
-    @component('sales.soheads._selectsalesorderjs')
-        $("#sohead_name").val(field.name);
-        $("#sohead_id").val(field.id);
-    @endcomponent
 
 @endsection

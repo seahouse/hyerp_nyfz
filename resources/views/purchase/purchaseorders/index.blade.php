@@ -54,6 +54,7 @@
                         {!! Form::submit('删除', ['class' => 'btn btn-danger btn-sm pull-left']) !!}
                         {!! Form::close() !!}
                         <a href="{{ URL::to('/purchase/purchaseorders/'.$purchaseorder->id.'/createpayment') }}" class="btn btn-success btn-sm pull-left">付款</a>
+                        <a href="{{ URL::to('/purchase/purchaseorders/'.$purchaseorder->id.'/indexpayment') }}" class="btn btn-success btn-sm pull-left">付款明细</a>
                     </td>
                 </tr>
             @endforeach

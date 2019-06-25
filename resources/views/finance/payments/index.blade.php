@@ -4,7 +4,7 @@
 
 @section('main')
     <div class="panel-heading">
-        <a href="payments/create" class="btn btn-sm btn-success">新建</a>
+        {{--<a href="payments/create" class="btn btn-sm btn-success">新建</a>--}}
 {{--        <div class="pull-right" style="padding-top: 4px;">
             <a href="{{ URL::to('purchase/vendtypes') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> {{'客户类型管理', [], 'layouts'}}</a>
         </div> --}}
@@ -15,7 +15,6 @@
     <table class="table table-striped table-hover table-condensed">
         <thead>
             <tr>
-                <th>对应采购订单</th>
                 <th>付款金额</th>
                 <th>付款日期</th>
                 <th>经办人</th>
@@ -27,9 +26,7 @@
         <tbody>
             @foreach($payments as $payment)
                 <tr>
-                    <td>
-                        @if(isset( $payment->pohead->number)) {{ $payment->pohead->number }} @else - @endif
-                     </td>
+
                      <td>
                          {{ $payment->amount }}
                      </td>
@@ -41,6 +38,7 @@
                      </td>
                      <td>
                          {{ $payment->paymethod }}
+{{--                         @if(isset( $payment->paymethodname->name)) {{ $payment->paymethodname->name }} @else - @endif--}}
                      </td>
                      <td>
                          {{ $payment->remark }}
