@@ -3,6 +3,7 @@
 @section('title', 'ASN')
 
 @section('main')
+    @can('sales_sohead_view')
     <div class="panel-heading">
         <a href="soheads/create" class="btn btn-sm btn-success">新建</a>
         {{--<a href="shipments/import" class="btn btn-sm btn-success">导入(Import)</a>--}}
@@ -105,7 +106,9 @@
             </div>
         @endif
     </div>
-
+    @else
+        无权限。
+    @endcan
 @endsection
 
 @section('script')

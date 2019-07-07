@@ -1,6 +1,7 @@
 @extends('navbarerp')
 
 @section('main')
+    @can('purchase_vendor_view')
     <div class="panel-heading">
         <a href="vendors/create" class="btn btn-sm btn-success">新建</a>
         {{--<div class="pull-right" style="padding-top: 4px;">--}}
@@ -52,7 +53,9 @@
         <i class="fa fa-warning"></i>
         {{'无记录', [], 'layouts'}}
     </div>
-    @endif    
+    @endif
 
-
+    @else
+        无权限。
+    @endcan
 @stop

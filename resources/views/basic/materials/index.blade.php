@@ -3,6 +3,7 @@
 @section('title', 'ASN')
 
 @section('main')
+    @can('basic_metrial_view')
     <div class="panel-heading">
         <a href="materials/create" class="btn btn-sm btn-success">新建</a>
 
@@ -55,4 +56,8 @@
     </div>
     @endif
     </div>
+
+    @else
+        无权限。
+    @endcan
 @endsection

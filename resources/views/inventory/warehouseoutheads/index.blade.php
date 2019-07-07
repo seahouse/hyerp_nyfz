@@ -3,6 +3,7 @@
 @section('title', '出库单')
 
 @section('main')
+    @can('inventory_warehouse_view')
     <div class="panel-heading">
         <a href="warehouseoutheads/create" class="btn btn-sm btn-success">新建</a>
 {{--        <div class="pull-right" style="padding-top: 4px;">
@@ -60,5 +61,7 @@
     </div>
     @endif
 
-
+    @else
+        无权限。
+    @endcan
 @stop

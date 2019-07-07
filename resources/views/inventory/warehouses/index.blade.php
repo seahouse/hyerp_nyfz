@@ -3,9 +3,9 @@
 @section('title', 'ASN')
 
 @section('main')
+    @can('inventory_warehouse_view')
     <div class="panel-heading">
         <a href="warehouses/create" class="btn btn-sm btn-success">新建</a>
-
     </div>
 
     <div class="panel-body">
@@ -58,4 +58,8 @@
     </div>
     @endif
     </div>
+
+    @else
+        无权限。
+    @endcan
 @endsection
