@@ -16,22 +16,27 @@ class PermissionsTableSeeder extends Seeder
             [
                 'name' => 'module_basic',
                 'display_name' => '基础资料',
+                'description' => '基础资料菜单',
             ],
             [
                 'name' => 'module_inventory',
                 'display_name' => '库存',
+                'description' => '库存菜单',
             ],
             [
                 'name' => 'module_sales',
                 'display_name' => '销售',
+                'description' => '销售菜单',
             ],
             [
                 'name' => 'module_purchase',
                 'display_name' => '采购',
+                'description' => '采购菜单',
             ],
             [
                 'name' => 'module_system',
                 'display_name' => '系统',
+                'description' => '系统菜单',
             ],
             [
                 'name' => 'basic_metrial_view',
