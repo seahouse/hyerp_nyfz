@@ -3,9 +3,10 @@
 @section('title', 'ASN')
 
 @section('main')
-    @can('sales_sohead_view')
+    @can('sales_maintainrecord_view')
     <div class="panel-heading">
-        <a href="soheads/create" class="btn btn-sm btn-success">新建</a>
+{{--        <a href="{{ URL::to('sales/maintainrecords/create') . (isset($sohead_id) ? '?sohead_id=' .$sohead_id : '') }}"  class="btn btn-sm btn-success">新建</a>--}}
+        <a href="{{ URL::to('sales/soheads/' . $sohead_id . '/maintainrecords/create') }}"  class="btn btn-sm btn-success">新建</a>
         {{--<a href="shipments/import" class="btn btn-sm btn-success">导入(Import)</a>--}}
     </div>
 
@@ -37,52 +38,49 @@
         {{--</div>--}}
         {{--{!! Form::close() !!}--}}
 
-        @if ($soheads->count())
+        @if ($maintainrecords->count())
             <table class="table table-striped table-hover table-condensed ">
                 <thead>
                 <tr>
-                    <th>编号</th>
-                    <th>客户名称</th>
-                    <th>订单日期</th>
-                    <th>销售金额</th>
-                    <th>到期日期</th>
-                    <th>创建时间</th>
+                    <th>序号</th>
+                    <th>提出日期</th>
+                    <th>问题描述</th>
+                    <th>处理人员</th>
+                    <th>处理日期</th>
+                    <th>处理结果</th>
                     {{--<th>Detail</th>--}}
                     <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($soheads as $sohead)
+                @foreach($maintainrecords as $maintainrecord)
                     <tr>
                         <td>
-                            {{ $sohead->number }}
+                            {{ $maintainrecord->seq }}
                         </td>
                         <td>
-                            @if (isset($sohead->customer->name)) {{ $sohead->customer->name }}  @endif
+                            {{ $maintainrecord->raisedate }}
+                        </td>
+                        <td title="{{ $maintainrecord->descrip }}">
+                            {{ str_limit($maintainrecord->descrip, 20) }}
                         </td>
                         <td>
-                            @if (isset($sohead->orderdate)) {{ $sohead->orderdate }} @else @endif
+                            {{ $maintainrecord->handler }}
                         </td>
                         <td>
-                            @if (isset($sohead->total_amount)) {{ $sohead->total_amount }} @else @endif
+                            {{ $maintainrecord->handlerdate }}
                         </td>
                         <td>
-                            @if (isset($sohead->duedate)) {{ $sohead->duedate }} @else @endif
-                        </td>
-                        <td>
-                            {{ $sohead->created_at }}
+                            {{ $maintainrecord->result }}
                         </td>
                         {{--<td>--}}
-                            {{--<a href="{{ URL::to('/shipment/shipments/' . $sohead->id . '/shipmentitems') }}" target="_blank">Detail</a>--}}
+                            {{--<a href="{{ URL::to('/shipment/shipments/' . $maintainrecord->id . '/shipmentitems') }}" target="_blank">Detail</a>--}}
                         {{--</td>--}}
                         <td>
-                            <a href="{{ URL::to('/sales/soheads/'.$sohead->id.'/edit') }}" class="btn btn-success btn-sm pull-left">编辑</a>
-                            <a href="{{ URL::to('/sales/soheads/' . $sohead->id . '/maintainrecords') }}" class="btn btn-success btn-sm pull-left" target="_blank">维护记录</a>
-                            {!! Form::open(array('route' => array('soheads.destroy', $sohead->id), 'method' => 'delete', 'onsubmit' => 'return confirm("确定删除此记录?");')) !!}
+                            <a href="{{ URL::to('/sales/maintainrecords/'.$maintainrecord->id.'/edit') }}" class="btn btn-success btn-sm pull-left">编辑</a>
+                            {!! Form::open(array('route' => array('maintainrecords.destroy', $maintainrecord->id), 'method' => 'delete', 'onsubmit' => 'return confirm("确定删除此记录?");')) !!}
                             {!! Form::submit('删除', ['class' => 'btn btn-danger btn-sm pull-left']) !!}
                             {!! Form::close() !!}
-                            <a href="{{ URL::to('/sales/soheads/'.$sohead->id.'/createreceipt') }}" class="btn btn-success btn-sm pull-left">收款</a>
-                            <a href="{{ URL::to('/sales/soheads/'.$sohead->id.'/indexreceipt') }}" class="btn btn-success btn-sm pull-left">收款明细</a>
                         </td >
                     </tr>
                 @endforeach
@@ -90,15 +88,7 @@
 
             </table>
             {{--{!! $soheads->render() !!}--}}
-            {!! $soheads->setPath('/shipment/shipments')->appends([
-                'createdatestart' => isset($inputs['createdatestart']) ? $inputs['createdatestart'] : null,
-                'createdateend' => isset($inputs['createdateend']) ? $inputs['createdateend'] : null,
-                'etdstart' => isset($inputs['etdstart']) ? $inputs['etdstart'] : null,
-                'etdend' => isset($inputs['etdend']) ? $inputs['etdend'] : null,
-                'amount_for_customer_opt' => isset($inputs['amount_for_customer_opt']) ? $inputs['amount_for_customer_opt'] : null,
-                'amount_for_customer' => isset($inputs['amount_for_customer']) ? $inputs['amount_for_customer'] : null,
-                'key' => isset($inputs['key']) ? $inputs['key'] : null,
-            ])->links() !!}
+            {!! $maintainrecords->setPath('/sales/maintainrecords')->appends($inputs)->links() !!}
         @else
             <div class="alert alert-warning alert-block">
                 <i class="fa fa-warning"></i>

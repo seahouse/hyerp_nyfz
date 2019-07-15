@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Sales;
 
 use App\Models\Finance\Receipt;
+use App\Models\Sales\Maintainrecord;
 use App\Models\Sales\Sohead;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -129,5 +130,13 @@ class SoheadController extends Controller
         //
         Sohead::destroy($id);
         return redirect('sales/soheads');
+    }
+
+    public function maintainrecords($sohead_id)
+    {
+        //
+        $maintainrecords = Maintainrecord::where('sohead_id',$sohead_id)->paginate(10);
+        $inputs = [];
+        return view('sales.maintainrecords.index',compact('maintainrecords', 'sohead_id', 'inputs'));
     }
 }

@@ -92,7 +92,10 @@ Route::group(['prefix' => 'sales', 'namespace' => 'Sales', 'middleware' => ['web
         Route::get('getitemsbykey/{key}', 'SoheadController@getitemsbykey');
         Route::get('{id}/createreceipt','SoheadController@createreceipt');
         Route::get('{id}/indexreceipt','SoheadController@indexreceipt');
-//        Route::get('{id}/mstatistics', 'SalesordersController@mstatistics');
+    });
+    Route::group(['prefix' => 'soheads/{sohead}'], function() {
+        Route::get('maintainrecords','SoheadController@maintainrecords');
+        Route::get('maintainrecords/create','MaintainrecordController@create');
     });
     Route::resource('soheads', 'SoheadController');
 //    Route::group(['prefix' => 'salesorderhx'], function() {
@@ -123,10 +126,11 @@ Route::group(['prefix' => 'sales', 'namespace' => 'Sales', 'middleware' => ['web
 //        Route::get('bonusbysalesmanager', '\App\Http\Controllers\My\MyController@bonusbysalesmanager');
 //        Route::get('bonusbytechdept', '\App\Http\Controllers\My\MyController@bonusbytechdept');
 //    });
-//    Route::group(['prefix' => '{sohead_id}/bonuspayment'], function () {
-//        Route::get('create', 'BonuspaymentController@create');
+    Route::group(['prefix' => 'maintainrecords/{sohead}'], function () {
+        Route::get('create', 'MaintainrecordController@create');
 //        Route::post('store', 'BonuspaymentController@store');
-//    });
+    });
+    Route::resource('maintainrecords', 'MaintainrecordController');
 });
 
 Route::group(['prefix' => 'purchaseorderc', 'namespace' => 'Purchaseorderc', 'middleware' => ['web', 'auth']], function() {
