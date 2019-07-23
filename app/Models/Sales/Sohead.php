@@ -22,4 +22,16 @@ class Sohead extends Model
 //        return $this->hasOne('App\Models\Sales\Customer', 'id', 'customer_id');
         return $this->belongsTo('App\Models\Sales\Customer');
     }
+
+    public function soheadattachments() {
+        return $this->hasMany('\App\Models\Sales\Soheadattachment', 'sohead_id', 'id');
+    }
+
+    public function files() {
+        return $this->soheadattachments->where('type', 'file');
+    }
+
+    public function images() {
+        return $this->soheadattachments->where('type', 'image');
+    }
 }

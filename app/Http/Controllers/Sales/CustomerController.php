@@ -20,7 +20,7 @@ class CustomerController extends Controller
         return view('sales.customers.index', compact('customers'));
     }
 
-    public function getitemsbykey($key)
+    public function getitemsbykey($key = '')
     {
         // $salesorders = Salesorder::latest('created_at')->where('number', 'like', '%' . $key . '%')
         //     ->orWhere('descrip', 'like', '%'.$key.'%')->paginate(20);

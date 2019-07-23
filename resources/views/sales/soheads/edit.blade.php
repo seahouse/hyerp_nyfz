@@ -11,6 +11,32 @@
     
     @include('errors.list')
     @include('sales.customers._selectcustomermodal')
+
+    <div class="modal fade" id="clearAttachModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">删除文件</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        删除该文件？
+                    </p>
+
+
+                </div>
+                <div class="modal-footer">
+                    {!! Form::open(['url' => '/sales/soheads/clearfile', 'class' => 'form-horizontal', 'files' => true, 'id' => 'frmClear']) !!}
+                    {!! Form::hidden('sohead_id', null, []) !!}
+                    {!! Form::hidden('type', null, []) !!}
+                    {!! Form::hidden('filename', null, []) !!}
+                    {!! Form::button('取消', ['class' => 'btn btn-sm', 'data-dismiss' => 'modal']) !!}
+                    {!! Form::button('删除', ['class' => 'btn btn-sm btn-primary', 'id' => 'btnClear']) !!}
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('script')
@@ -67,6 +93,39 @@
                     // $("#sohead_number").val(field.number);
                 });
             }
+
+            $('#clearAttachModal').on('show.bs.modal', function (e) {
+                var target = $(e.relatedTarget);
+                // alert(text.data('id'));
+
+                var modal = $(this);
+                modal.find("input[name='sohead_id']").val(target.data('sohead_id'));
+                modal.find("input[name='type']").val(target.data('type'));
+                modal.find("input[name='filename']").val(target.data('filename'));
+            });
+
+            $("#btnClear").click(function() {
+                var form = new FormData(document.getElementById("frmClear"));
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('sales/soheads/clearfile') }}",
+                    data: form,
+                    contentType: false,
+                    processData: false,
+//                    dataType: "json",
+                    error:function(xhr, ajaxOptions, thrownError){
+                        alert('error');
+                    },
+                    success:function(result){
+                        alert("Clear Success.");
+                        window.location.reload();
+//                        $('#clearAttachModal').modal('toggle');
+//                        var id = "filehandler_" + $('#clearAttachModal').find("input[name='shipment_id']").val() + "_" + $('#clearAttachModal').find("input[name='type']").val();
+//                        $("#filehandler_" + $('#clearAttachModal').find("input[name='shipment_id']").val() + "_" + $('#clearAttachModal').find("input[name='type']").val()).html(result.popoverhtml);
+//                        $('[data-toggle="popover"]').popover();
+                    },
+                });
+            });
         });
     </script>
 @endsection

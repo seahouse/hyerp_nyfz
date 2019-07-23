@@ -85,13 +85,13 @@ Route::group(['prefix' => 'sales', 'namespace' => 'Sales', 'middleware' => ['web
 //    });
 //    Route::resource('projects', 'ProjectController');
 //    Route::get('salesorders/{id}/ship', 'SalesordersController@ship');
-//    Route::post('salesorders/search', 'SalesordersController@search');
     Route::group(['prefix' => 'soheads'], function() {
 //        Route::get('mindex', 'SalesordersController@mindex');
 //        Route::get('getitembyid/{id}', 'SalesordersController@getitembyid');
-        Route::get('getitemsbykey/{key}', 'SoheadController@getitemsbykey');
+        Route::get('getitemsbykey/{key?}', 'SoheadController@getitemsbykey');
         Route::get('{id}/createreceipt','SoheadController@createreceipt');
         Route::get('{id}/indexreceipt','SoheadController@indexreceipt');
+        Route::post('clearfile', 'SoheadController@clearfile');
     });
     Route::group(['prefix' => 'soheads/{sohead}'], function() {
         Route::get('maintainrecords','SoheadController@maintainrecords');
@@ -118,7 +118,7 @@ Route::group(['prefix' => 'sales', 'namespace' => 'Sales', 'middleware' => ['web
 //    Route::get('soitems/{headId}/create', 'SoitemsController@createBySoheadId');
 //    Route::resource('soitems', 'SoitemsController');
     Route::group(['prefix' => 'customers'], function() {
-        Route::get('getitemsbykey/{key}', 'CustomerController@getitemsbykey');
+        Route::get('getitemsbykey/{key?}', 'CustomerController@getitemsbykey');
     });
     Route::resource('customers', 'CustomerController');
 //    Route::get('report', '\App\Http\Controllers\System\ReportController@indexsales');
@@ -147,7 +147,7 @@ Route::group(['prefix' => 'purchaseorderc', 'namespace' => 'Purchaseorderc', 'mi
 
 Route::group(['prefix' => 'purchase', 'namespace' => 'Purchase', 'middleware' => ['web', 'auth']], function() {
     Route::group(['prefix' => 'vendors'], function() {
-        Route::get('getitemsbykey/{key}', 'VendorController@getitemsbykey');
+        Route::get('getitemsbykey/{key?}', 'VendorController@getitemsbykey');
     });
     Route::resource('vendors', 'VendorController');
 //    Route::resource('vendtypes', 'VendtypesController');
@@ -182,8 +182,7 @@ Route::group(['prefix' => 'purchase', 'namespace' => 'Purchase', 'middleware' =>
 
         Route::get('{id}/createpayment','PurchaseorderController@createpayment');
         Route::get('{id}/indexpayment','PurchaseorderController@indexpayment');
-
-//        Route::post('search_hx', 'PurchaseordersController@search_hx');
+        Route::post('clearfile', 'PurchaseorderController@clearfile');
     });
 //    Route::group(['prefix' => 'poheadtaxrateass'], function() {
 //        Route::get('destorybyid/{id}', 'PoheadtaxrateassController@destorybyid');       // use get for page opt.

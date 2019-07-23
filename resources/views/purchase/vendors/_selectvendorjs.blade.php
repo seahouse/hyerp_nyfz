@@ -11,11 +11,39 @@
 //                modal.find('#id').val(text.data('id'));
         });
 
+        $('#selectVendorModal').on('shown.bs.modal', function (e) {
+            $("#listvendors").empty();
+
+            $.ajax({
+                type: "GET",
+                url: "{!! url('/purchase/vendors/getitemsbykey/') !!}",
+                success: function(result) {
+                    var strhtml = '';
+                    $.each(result.data, function(i, field) {
+                        btnId = 'btnSelectVendor_' + String(i);
+                        strhtml += "<button type='button' class='list-group-item' id='" + btnId + "'>" + "<h4>" + field.name + "</h4></button>"
+                    });
+                    if (strhtml == '')
+                        strhtml = '无记录。';
+                    $("#listvendors").empty().append(strhtml);
+
+                    $.each(result.data, function(i, field) {
+                        btnId = 'btnSelectVendor_' + String(i);
+                        addBtnClickEventVendor(btnId, field);
+                    });
+                    // addBtnClickEvent('btnSelectOrder_0');
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert('error');
+                }
+            });
+        });
+
         $("#btnSearchVendor").click(function() {
-            if ($("#keyVendor").val() == "") {
-                alert('请输入关键字');
-                return;
-            }
+//            if ($("#keyVendor").val() == "") {
+//                alert('请输入关键字');
+//                return;
+//            }
             $.ajax({
                 type: "GET",
                 url: "{!! url('/purchase/vendors/getitemsbykey/') !!}" + "/" + $("#keyVendor").val(),

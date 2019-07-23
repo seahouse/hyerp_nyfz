@@ -30,4 +30,16 @@ class Purchaseorder extends Model
     public function soheads() {
         return $this->belongsToMany('App\Models\Sales\Sohead', 'sohead_pohead', 'pohead_id');
     }
+
+    public function poheadattachments() {
+        return $this->hasMany('\App\Models\Purchase\Poheadattachment', 'pohead_id', 'id');
+    }
+
+    public function files() {
+        return $this->poheadattachments->where('type', 'file');
+    }
+
+    public function images() {
+        return $this->poheadattachments->where('type', 'image');
+    }
 }

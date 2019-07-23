@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Purchase;
 
 use App\Models\Finance\Payment;
+use App\Models\Purchase\Poheadattachment;
 use App\Models\Purchase\Poitem;
 use App\Models\Purchase\Purchaseorder;
 use App\Models\Purchase\Sohead_Pohead;
 use App\Models\Purchaseorderc\Poitemc;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Log;
 
 class PurchaseorderController extends Controller
 {
@@ -60,7 +62,49 @@ class PurchaseorderController extends Controller
             $sohead_pohead->sohead_id = $request->input('sohead_id');
             $sohead_pohead->pohead_id = $pohead->id;
             $sohead_pohead->save();
+        }
 
+        if ($pohead)
+        {
+            $files = array_get($request->all(), 'files');
+            if ($files)
+            {
+                foreach ($files as $key => $file) {
+                    if ($file)
+                    {
+                        $path = $file->store('public/poheads/' . $pohead->id);
+
+                        $poheadattachment = Poheadattachment::where('pohead_id', $pohead->id)->where('type', 'file')->where('filename',$file->getClientOriginalName()) ->first();
+                        if (!isset($poheadattachment))
+                            $poheadattachment = new Poheadattachment();
+                        $poheadattachment->pohead_id = $pohead->id;
+                        $poheadattachment->type = 'file';
+                        $poheadattachment->filename = $file->getClientOriginalName();
+                        $poheadattachment->path = $path;     // add a '/' in the head.
+                        $poheadattachment->save();
+                    }
+                }
+            }
+
+            $files = array_get($request->all(), 'images');
+            if ($files)
+            {
+                foreach ($files as $key => $file) {
+                    if ($file)
+                    {
+                        $path = $file->store('public/poheads/' . $pohead->id);
+
+                        $poheadattachment = Poheadattachment::where('pohead_id', $pohead->id)->where('type', 'image')->where('filename',$file->getClientOriginalName()) ->first();
+                        if (!isset($poheadattachment))
+                            $poheadattachment = new Poheadattachment();
+                        $poheadattachment->pohead_id = $pohead->id;
+                        $poheadattachment->type = 'image';
+                        $poheadattachment->filename = $file->getClientOriginalName();
+                        $poheadattachment->path = $path;     // add a '/' in the head.
+                        $poheadattachment->save();
+                    }
+                }
+            }
         }
 
         return redirect('purchase/purchaseorders');
@@ -151,22 +195,60 @@ class PurchaseorderController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $purchaseorder = Purchaseorder::findOrFail($id);
-        $purchaseorder->update($request->all());
+        $pohead = Purchaseorder::findOrFail($id);
+        $pohead->update($request->all());
 
         if ($request->has('sohead_id') && $request->input('sohead_id')> 0)
         {
             $sohead_pohead = new Sohead_Pohead;
             $sohead_pohead->sohead_id = $request->input('sohead_id');
-            $sohead_pohead->pohead_id = $purchaseorder->id;
+            $sohead_pohead->pohead_id = $pohead->id;
             $sohead_pohead->save();
-
-//            Sohead_Pohead::create([
-//                'sohead_id' => $request->input('sohead_id'),
-//                'pohead_id' => $purchaseorder->id,
-//            ]);
         }
 
+        if ($pohead)
+        {
+            $files = array_get($request->all(), 'files');
+            if ($files)
+            {
+                foreach ($files as $key => $file) {
+                    if ($file)
+                    {
+                        dd($file);
+                        $path = $file->store('public/poheads/' . $pohead->id);
+
+                        $poheadattachment = Poheadattachment::where('pohead_id', $pohead->id)->where('type', 'file')->where('filename',$file->getClientOriginalName()) ->first();
+                        if (!isset($poheadattachment))
+                            $poheadattachment = new Poheadattachment();
+                        $poheadattachment->pohead_id = $pohead->id;
+                        $poheadattachment->type = 'file';
+                        $poheadattachment->filename = $file->getClientOriginalName();
+                        $poheadattachment->path = $path;     // add a '/' in the head.
+                        $poheadattachment->save();
+                    }
+                }
+            }
+
+            $files = array_get($request->all(), 'images');
+            if ($files)
+            {
+                foreach ($files as $key => $file) {
+                    if ($file)
+                    {
+                        $path = $file->store('public/poheads/' . $pohead->id);
+
+                        $poheadattachment = Poheadattachment::where('pohead_id', $pohead->id)->where('type', 'image')->where('filename',$file->getClientOriginalName()) ->first();
+                        if (!isset($poheadattachment))
+                            $poheadattachment = new Poheadattachment();
+                        $poheadattachment->pohead_id = $pohead->id;
+                        $poheadattachment->type = 'image';
+                        $poheadattachment->filename = $file->getClientOriginalName();
+                        $poheadattachment->path = $path;     // add a '/' in the head.
+                        $poheadattachment->save();
+                    }
+                }
+            }
+        }
 
         return redirect('purchase/purchaseorders');
     }
@@ -220,5 +302,54 @@ class PurchaseorderController extends Controller
             })
             ->paginate(20);
         return $purchaseorders;
+    }
+
+    public function clearfile(Request $request)
+    {
+        //
+//        Log::info($request->all());
+        $popoverhtml = '';
+        Log::info($request->all());
+        if ($request->has('pohead_id') && $request->has('type') && $request->has('filename'))
+        {
+            $pohead = Purchaseorder::find($request->input('pohead_id'));
+            if (isset($pohead))
+            {
+                $type = $request->input('type');
+                $filename = $request->input('filename');
+
+                $poheadattachments = Poheadattachment::where('pohead_id', $pohead->id)->where('type', $type)->where('filename', $filename)->get();
+//                Log::info($poheadattachments);
+                foreach ($poheadattachments as $poheadattachment)
+                {
+                    if (isset($poheadattachment))
+                    {
+//                        $path = $shipmentattachment->path;
+                        $poheadattachment->delete();
+
+//                        // add record
+//                        $shipmentattachmentrecord = new Shipmentattachmentrecord();
+//                        $shipmentattachmentrecord->shipment_id = $shipment->id;
+//                        $shipmentattachmentrecord->type = $type;
+//                        $shipmentattachmentrecord->filename = $filename;
+//                        $shipmentattachmentrecord->path = $path;     // add a '/' in the head.
+//                        $shipmentattachmentrecord->operation_type = 'Delete';
+//                        $shipmentattachmentrecord->operator = Auth::user()->name;
+//                        $shipmentattachmentrecord->save();
+                    }
+                }
+
+//                $popoverhtml = '<button class="btn btn-sm" data-toggle="modal" data-target="#uploadAttachModal" data-shipment_id="' . $shipment->id . '" data-type="' . $type . '" type="button">+</button>';
+
+                Log::info($popoverhtml);
+            }
+        }
+
+        $data = [
+            'errcode' => 0,
+            'errmsg' => '删除成功。',
+            'popoverhtml' => $popoverhtml,
+        ];
+        return response()->json($data);
     }
 }

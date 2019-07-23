@@ -60,7 +60,45 @@
     </div>
 </div>
 
+<div class="form-group">
+    {!! Form::label('files', '文件:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
+    <div class='col-xs-8 col-sm-10'>
+        @if (isset($sohead))
+            @foreach ($sohead->files() as $file)
+                <a href="{!! Storage::url($sohead->soheadattachments->where('type', 'file')->where('filename', $file->filename)->first()->path) !!}" target="_blank">{{ $file->filename }}</a>
+                <button class='btn btn-sm' data-toggle='modal' data-target='#clearAttachModal' data-sohead_id='{!! $sohead->id !!}' data-type='file' data-filename="{!! $file->filename !!}" type='button'>删除</button><br>
+            @endforeach
+            {!! Form::file('files[]', ['multiple']) !!}
+        @else
+            {!! Form::file('files[]', ['multiple']) !!}
+        @endif
+    </div>
+</div>
 
+<div class="form-group">
+    {!! Form::label('images', '图片:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
+
+    <div class='col-xs-8 col-sm-10'>
+        <div class="row" id="previewimage">
+        </div>
+        @if (isset($sohead))
+            <div class="row" id="previewimage2">
+                @foreach ($sohead->images() as $image)
+                    <div class="col-xs-6 col-md-3">
+                        <div class="thumbnail">
+                            <img src="{!! Storage::url($sohead->soheadattachments->where('type', 'image')->where('filename', $image->filename)->first()->path) !!}" />
+                            <button class='btn btn-sm' data-toggle='modal' data-target='#clearAttachModal' data-sohead_id='{!! $sohead->id !!}' data-type='image' data-filename="{!! $image->filename !!}" type='button'>删除</button>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            {!! Form::file('images[]', ['multiple']) !!}
+        @else
+            {!! Form::file('images[]', ['multiple']) !!}
+        @endif
+
+    </div>
+</div>
 
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
