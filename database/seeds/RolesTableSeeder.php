@@ -13,10 +13,10 @@ class RolesTableSeeder extends Seeder
     {
         //
         DB::table('roles')->insert([
-            [
-                'name' => 'superadministrator',
-                'display_name' => '超级管理员',
-            ],
+//            [
+//                'name' => 'superadministrator',
+//                'display_name' => '超级管理员',
+//            ],
         ]);
     }
 }
