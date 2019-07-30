@@ -76,12 +76,17 @@
                             {{--<a href="{{ URL::to('/shipment/shipments/' . $sohead->id . '/shipmentitems') }}" target="_blank">Detail</a>--}}
                         {{--</td>--}}
                         <td>
+                            <a href="{{ URL::to('/sales/soheads/'.$sohead->id) }}" class="btn btn-success btn-sm pull-left">查看</a>
                             <a href="{{ URL::to('/sales/soheads/'.$sohead->id.'/edit') }}" class="btn btn-success btn-sm pull-left">编辑</a>
                             <a href="{{ URL::to('/sales/soheads/' . $sohead->id . '/maintainrecords') }}" class="btn btn-success btn-sm pull-left" target="_blank">维护记录</a>
+                            @can('sales_sohead_edit')
                             {!! Form::open(array('route' => array('soheads.destroy', $sohead->id), 'method' => 'delete', 'onsubmit' => 'return confirm("确定删除此记录?");')) !!}
                             {!! Form::submit('删除', ['class' => 'btn btn-danger btn-sm pull-left']) !!}
                             {!! Form::close() !!}
+                            @endcan
+                            @can('sales_sohead_edit')
                             <a href="{{ URL::to('/sales/soheads/'.$sohead->id.'/createreceipt') }}" class="btn btn-success btn-sm pull-left">收款</a>
+                            @endcan
                             <a href="{{ URL::to('/sales/soheads/'.$sohead->id.'/indexreceipt') }}" class="btn btn-success btn-sm pull-left">收款明细</a>
                         </td >
                     </tr>

@@ -3,10 +3,14 @@
 @section('main')
     <h1>编辑</h1>
     <hr/>
-    
+
+    @can('sales_sohead_edit')
     {!! Form::model($sohead, ['method' => 'PATCH', 'action' => ['Sales\SoheadController@update', $sohead->id], 'class' => 'form-horizontal', 'files' => true]) !!}
-        @include('sales.soheads._form', ['submitButtonText' => '保存'])
+        @include('sales.soheads._form', ['readonly' => '', 'btnclass' => 'btn btn-primary', 'submitButtonText' => '保存'])
     {!! Form::close() !!}
+    @else
+        无权限。
+    @endcan
 
     
     @include('errors.list')

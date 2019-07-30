@@ -47,14 +47,14 @@
                         <a href="{{ URL::to('/purchase/purchaseorders/' . $purchaseorder->id . '/detail') }}" target="_blank">明细</a>
                     </td>
                     <td>
+                        <a href="{{ URL::to('/purchase/purchaseorders/'.$purchaseorder->id) }}" class="btn btn-success btn-sm pull-left">查看</a>
                         <a href="{{ URL::to('/purchase/purchaseorders/'.$purchaseorder->id.'/edit') }}" class="btn btn-success btn-sm pull-left">编辑</a>
-
-                        {{--<a href="{{ URL::to('/purchase/purchaseorders/' . $purchaseorder->id . '/packing') }}" class="btn btn-success btn-sm pull-left" target="_blank">打包</a>--}}
-                        {{--<a href="{{ URL::to('/purchase/purchaseorders/' . $purchaseorder->id . '/payments') }}" target="_blank" class="btn btn-success btn-sm pull-left">付款</a>--}}
+                        @can('purchase_pohead_edit')
                         {!! Form::open(array('route' => array('purchaseorders.destroy', $purchaseorder->id), 'method' => 'delete', 'onsubmit' => 'return confirm("确定删除此记录?");')) !!}
                         {!! Form::submit('删除', ['class' => 'btn btn-danger btn-sm pull-left']) !!}
                         {!! Form::close() !!}
                         <a href="{{ URL::to('/purchase/purchaseorders/'.$purchaseorder->id.'/createpayment') }}" class="btn btn-success btn-sm pull-left">付款</a>
+                        @endcan
                         <a href="{{ URL::to('/purchase/purchaseorders/'.$purchaseorder->id.'/indexpayment') }}" class="btn btn-success btn-sm pull-left">付款明细</a>
                     </td>
                 </tr>

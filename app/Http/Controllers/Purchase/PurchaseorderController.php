@@ -170,6 +170,8 @@ class PurchaseorderController extends Controller
     public function show($id)
     {
         //
+        $purchaseorder = Purchaseorder::findOrFail($id);
+        return view('purchase.purchaseorders.show', compact('purchaseorder'));
     }
 
     /**

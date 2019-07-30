@@ -3,15 +3,19 @@
 @section('main')
     <h1>添加采购订单</h1>
     <hr/>
-    
+
+    @can('purchase_pohead_edit')
     {!! Form::open(['url' => 'purchase/purchaseorders', 'class' => 'form-horizontal']) !!}
         @include('purchase.purchaseorders._form',
             [
                 'submitButtonText' => '添加',
                 'attr'  => '',
+                'btnclass' => 'btn btn-primary',
             ])
     {!! Form::close() !!}
-    
+    @else
+        无权限。
+    @endcan
 
     @include('errors.list')
     @include('sales.soheads._selectsalesordermodal')

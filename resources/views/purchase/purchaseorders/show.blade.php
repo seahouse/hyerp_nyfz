@@ -1,20 +1,11 @@
 @extends('navbarerp')
 
 @section('main')
-    <h1>{{ $item->item_number }}</h1>
-    <p>
-        Name: {{ $item->item_name }}
-    </p>
-    <p>
-        Description: {{ $item->item_descrip }}
-    </p>
-    <p>
-        Item class: {{ $itemclass->name }}
-    </p>
-    <p>
-        Item Type: {{ $itemtype->name }}
-    </p>
-    <p>
-        Marke Price: {{ $item->marketprice }}
-    </p>
-@stop
+    @can('sales_sohead_edit')
+        {!! Form::model($purchaseorder, ['class' => 'form-horizontal', 'files' => true]) !!}
+        @include('purchase.purchaseorders._form', ['attr' => 'readonly', 'btnclass' => 'hidden', 'submitButtonText' => '保存'])
+        {!! Form::close() !!}
+    @else
+        无权限。
+    @endcan
+@endsection

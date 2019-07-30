@@ -3,7 +3,8 @@
 @section('main')
     <h1>编辑</h1>
     <hr/>
-    
+
+    @can('purchase_pohead_edit')
     {!! Form::model($purchaseorder, ['method' => 'PATCH', 'action' => ['Purchase\PurchaseorderController@update', $purchaseorder->id], 'class' => 'form-horizontal', 'files' => true]) !!}
         @include('purchase.purchaseorders._form',
             [
@@ -12,7 +13,10 @@
                 'btnclass' => 'btn btn-primary',
             ])
     {!! Form::close() !!}
-    
+    @else
+        无权限。
+    @endcan
+
     @include('errors.list')
 
     @include('sales.soheads._selectsalesordermodal')

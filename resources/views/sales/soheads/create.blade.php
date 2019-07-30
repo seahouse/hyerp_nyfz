@@ -3,10 +3,14 @@
 @section('main')
     <h1>添加销售订单</h1>
     <hr/>
-    
+
+    @can('sales_sohead_edit')
     {!! Form::open(['url' => 'sales/soheads', 'class' => 'form-horizontal', 'files' => true]) !!}
-        @include('sales.soheads._form', ['submitButtonText' => '添加'])
+        @include('sales.soheads._form', ['readonly' => '', 'btnclass' => 'btn btn-primary', 'submitButtonText' => '添加'])
     {!! Form::close() !!}
+    @else
+        无权限。
+        @endcan
 
     
     @include('errors.list')

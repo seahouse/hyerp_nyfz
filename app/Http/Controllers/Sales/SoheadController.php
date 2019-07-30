@@ -119,6 +119,8 @@ class SoheadController extends Controller
     public function show($id)
     {
         //
+        $sohead = Sohead::findOrFail($id);
+        return view('sales.soheads.show', compact('sohead'));
     }
 
     /**

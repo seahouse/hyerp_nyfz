@@ -1,14 +1,14 @@
 <div class="form-group">
     {!! Form::label('number', '编号:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
-        {!! Form::text('number', null, ['class' => 'form-control']) !!}
+        {!! Form::text('number', null, ['class' => 'form-control', $readonly]) !!}
     </div>
 </div>
 
 <div class="form-group">
     {!! Form::label('name', '订单名称:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
-        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+        {!! Form::text('name', null, ['class' => 'form-control', $readonly]) !!}
     </div>
 </div>
 
@@ -16,9 +16,9 @@
     {!! Form::label('customer_name', '客户:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
         @if (isset($sohead->customer->name))
-            {!! Form::text('customer_name', $sohead->customer->name, ['class' => 'form-control', 'data-toggle' => 'modal', 'data-target' => '#selectCustomerModal', 'id' => 'customer_name']) !!}
+            {!! Form::text('customer_name', $sohead->customer->name, ['class' => 'form-control', 'data-toggle' => 'modal', 'data-target' => '#selectCustomerModal', 'id' => 'customer_name', $readonly]) !!}
         @else
-            {!! Form::text('customer_name', null, ['class' => 'form-control', 'data-toggle' => 'modal', 'data-target' => '#selectCustomerModal', 'id' => 'customer_name']) !!}
+            {!! Form::text('customer_name', null, ['class' => 'form-control', 'data-toggle' => 'modal', 'data-target' => '#selectCustomerModal', 'id' => 'customer_name', $readonly]) !!}
         @endif
         {!! Form::hidden('customer_id', null, ['id' => 'customer_id']) !!}
     </div>
@@ -27,21 +27,21 @@
 <div class="form-group">
     {!! Form::label('total_amount', '订单金额:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
-        {!! Form::text('total_amount', null, ['class' => 'form-control']) !!}
+        {!! Form::text('total_amount', null, ['class' => 'form-control', $readonly]) !!}
     </div>
 </div>
 
 <div class="form-group">
     {!! Form::label('duedate', '到期日期:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
-        {!! Form::date('duedate', null, ['class' => 'form-control']) !!}
+        {!! Form::date('duedate', null, ['class' => 'form-control', $readonly]) !!}
     </div>
 </div>
 
 <div class="form-group">
     {!! Form::label('orderdate', '订单日期:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
-        {!! Form::date('orderdate', null, ['class' => 'form-control']) !!}
+        {!! Form::date('orderdate', null, ['class' => 'form-control', $readonly]) !!}
     </div>
 </div>
 
@@ -56,7 +56,7 @@
 <div class="form-group">
     {!! Form::label('drawing_completed', '图纸完成状态:', ['class' => 'col-xs-4 col-sm-2 control-label']) !!}
     <div class='col-xs-8 col-sm-10'>
-        {!! Form::select('drawing_completed', array('1'=>'是', '0'=>'否'), null, ['class' => 'form-control']) !!}
+        {!! Form::select('drawing_completed', array('1'=>'是', '0'=>'否'), null, ['class' => 'form-control', $readonly]) !!}
     </div>
 </div>
 
@@ -68,9 +68,9 @@
                 <a href="{!! Storage::url($sohead->soheadattachments->where('type', 'file')->where('filename', $file->filename)->first()->path) !!}" target="_blank">{{ $file->filename }}</a>
                 <button class='btn btn-sm' data-toggle='modal' data-target='#clearAttachModal' data-sohead_id='{!! $sohead->id !!}' data-type='file' data-filename="{!! $file->filename !!}" type='button'>删除</button><br>
             @endforeach
-            {!! Form::file('files[]', ['multiple']) !!}
+            {!! Form::file('files[]', ['multiple', $readonly]) !!}
         @else
-            {!! Form::file('files[]', ['multiple']) !!}
+            {!! Form::file('files[]', ['multiple', $readonly]) !!}
         @endif
     </div>
 </div>
@@ -102,7 +102,7 @@
 
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-        {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary', 'id' => 'btnSubmit']) !!}
+        {!! Form::submit($submitButtonText, ['class' => $btnclass, 'id' => 'btnSubmit']) !!}
     </div>
 </div>
 
